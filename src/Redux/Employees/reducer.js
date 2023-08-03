@@ -14,7 +14,7 @@ import {
 } from './types'
 
 const INITIAL_STATE_VALUE = {
-  users: [],
+  employees: [],
   isLoading: false,
   error: false,
   message: ''
@@ -33,7 +33,7 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         ...state,
         isLoading: false,
         error: false,
-        users: [...state.list, action.payload]
+        Employees: [...state.employees, action.payload]
       }
     case ADD_EMPLOYEE_ERROR:
       return {
@@ -52,7 +52,7 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
       return {
         ...state,
         isLoading: false,
-        users: action.payload
+        Employees: action.payload
       }
     case GET_EMPLOYEES_ERROR:
       return {
@@ -71,7 +71,7 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         ...state,
         isLoading: false,
         error: false,
-        users: action.payload
+        Employees: action.payload
       }
     case EDIT_EMPLOYEE_ERROR:
       return {
@@ -90,8 +90,8 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         ...state,
         isLoading: false,
         error: false,
-        users: [...state.list.filter((EMPLOYEE) => EMPLOYEE._id !== action.payload)],
-        message: 'User deleted Successfully'
+        Employees: [...state.employees.filter((EMPLOYEE) => EMPLOYEE._id !== action.payload)],
+        message: 'Employee deleted Successfully'
       }
     case DELETE_EMPLOYEE_ERROR:
       return {

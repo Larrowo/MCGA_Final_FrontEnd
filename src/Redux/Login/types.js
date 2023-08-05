@@ -1,0 +1,13 @@
+// GET LOGIN
+export const GET_LOGIN_PENDING = 'GET_LOGIN_PENDING'
+export const GET_LOGIN_SUCCESS = 'GET_LOGIN_SUCCESS'
+export const GET_LOGIN_ERROR = 'GET_LOGIN_ERROR'
+
+// SET USER
+export const SET_USER = 'SET_USER'
+
+// SET TOKEN
+export const SET_TOKEN = 'SET_TOKEN'
+
+// LOGOUT
+export const LOGOUT = 'LOGOUT'

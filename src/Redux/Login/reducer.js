@@ -7,20 +7,22 @@ import {
   LOGOUT
 } from './types'
 
-const user = JSON.parse(localStorage.getItem(process.env.REACT_APP_USER_KEY))
+// const user
+// JSON.parse(localStorage.getItem(process.env.REACT_APP_USER_KEY))
+
+// user
+//     ? {
+//         name: user.name,
+//         email: user.email,
+//         token: user.token
+//       }
 
 const initialState = {
   isFetching: false,
   list: [],
   error: '',
-  user: user
-    ? {
-        name: user.name,
-        email: user.email,
-        token: user.token
-      }
-    : null,
-  token: localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)
+  user: null,
+  token: null
 }
 
 const loginReducer = (state = initialState, action) => {

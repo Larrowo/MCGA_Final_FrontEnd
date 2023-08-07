@@ -14,7 +14,7 @@ function index () {
   return (
     <div>
       <h2>LOGIN</h2>
-      <button onClick={logIn} ></button>
+      <button onClick={logIn} >LOGIN</button>
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 
-function index () {
+function index ({ children }) {
   return (
-    <div>index</div>
+    <div>{children}</div>
   )
 }
 

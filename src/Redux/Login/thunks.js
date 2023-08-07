@@ -17,7 +17,7 @@ export const login = (credentials) => {
       },
       body: JSON.stringify(credentials)
     }
-    return await fetch(`${process.env.REACT_APP_API}/auth/login`, options)
+    return await fetch(`${import.meta.env.REACT_APP_API}/auth/login`, options)
       .then(async (response) => {
         if (response.status !== 200) {
           return response.json()
@@ -47,7 +47,7 @@ export const getUserData = () => async (dispatch, getState) => {
       return
     }
     dispatch(getLoginPending())
-    const response = await fetch(`${process.env.REACT_APP_API}/auth/me`, {
+    const response = await fetch(`${import.meta.env.REACT_APP_API}/auth/me`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

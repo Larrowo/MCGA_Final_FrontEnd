@@ -10,7 +10,6 @@ import { AuthGuard } from './guards/auth.guard'
 function App () {
   return (
    <div className="app">
-    <h1>Hello world</h1>
     <BrowserRouter>
      <Layout>
       <Routes>

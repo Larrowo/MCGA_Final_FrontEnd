@@ -22,7 +22,7 @@ export const getEmployees = () => {
   return (dispatch, getState) => {
     dispatch(getEmployeesPending())
     const token = getState().login.token
-    return fetch(`${process.env.REACT_APP_API}/Employees`, {
+    return fetch(`${import.meta.env.REACT_APP_API}/Employees`, {
       headers: {
         token
       }
@@ -48,7 +48,7 @@ export const getEmployees = () => {
 export const getEmployeeById = (id) => {
   return (dispatch) => {
     dispatch(getEmployeeByIdPending())
-    return fetch(`${process.env.REACT_APP_API}/Employees?_id=${id}`)
+    return fetch(`${import.meta.env.REACT_APP_API}/Employees?_id=${id}`)
       .then((response) => {
         if (response.status !== 200) {
           return response.json().then(({ message }) => {
@@ -80,7 +80,7 @@ export const createEmployee = (values) => {
       },
       body: JSON.stringify(values)
     }
-    return fetch(`${process.env.REACT_APP_API}/Employees`, options)
+    return fetch(`${import.meta.env.REACT_APP_API}/Employees`, options)
       .then((response) => {
         if (response.status !== 201) {
           return response.json().then(({ message }) => {
@@ -110,7 +110,7 @@ export const updateEmployee = (id, values) => {
       },
       body: JSON.stringify(values)
     }
-    return fetch(`${process.env.REACT_APP_API}/Employees/${id}`, options)
+    return fetch(`${import.meta.env.REACT_APP_API}/Employees/${id}`, options)
       .then((response) => {
         if (response.status !== 200) {
           return response.json().then(({ message }) => {
@@ -133,7 +133,7 @@ export const updateEmployee = (id, values) => {
 export const deleteEmployee = (id) => {
   return (dispatch) => {
     dispatch(deleteEmployeePending())
-    return fetch(`${process.env.REACT_APP_API}/Employees/${id}`, { method: 'DELETE' })
+    return fetch(`${import.meta.env.REACT_APP_API}/Employees/${id}`, { method: 'DELETE' })
       .then((response) => {
         if (response.status !== 204) {
           return response.json()

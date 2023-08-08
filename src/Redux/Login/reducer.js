@@ -7,19 +7,18 @@ import {
   LOGOUT
 } from './types'
 
-const user = JSON.parse(localStorage.getItem(import.meta.env.REACT_APP_USER_KEY))
+// const user = JSON.parse(localStorage.getItem(import.meta.env.REACT_APP_USER_KEY))
 
 const initialState = {
   isFetching: false,
   list: [],
   error: '',
-  user: user
-    ? {
-        name: user.name,
-        email: user.email,
-        token: user.token
-      }
-    : null,
+  user:
+    {
+      name: '',
+      email: '',
+      token: ''
+    },
   token: null
 }
 

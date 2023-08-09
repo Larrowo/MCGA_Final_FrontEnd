@@ -1,14 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../../Redux/Login/thunks'
+import { useSelector } from 'react-redux'
+// import { login } from '../../Redux/Login/thunks'
+import { useNavigate } from 'react-router-dom'
+import { PrivateRoutes } from '../../models/routes'
 
 function index () {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const user = useSelector((store) => store.login.user)
+
   const logIn = () => {
-    dispatch(login())
-    const user = useSelector((store) => store.user)
-    if (user) {
-      // navigate to the employees list page
-    }
+    user.name = 'test'
+    navigate(`/${PrivateRoutes.DASHBOARD}`, { replace: true })
   }
 
   return (

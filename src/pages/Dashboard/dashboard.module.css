@@ -1,0 +1,14 @@
+.table{
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px solid black
+}
+
+.tbody{
+    padding: 8px;
+}
+.thead{
+    padding: 8px;
+}

@@ -71,39 +71,39 @@ export const deleteEmployeeError = (error) => {
   }
 }
 
-export const getEmployeeSuccess = (data) => {
+export const getEmployeesSuccess = (data) => {
   return {
     type: GET_EMPLOYEES_SUCCESS,
     payload: data
   }
 }
 
-export const getEmployeeLoading = (data) => {
+export const getEmployeesLoading = (data) => {
   return {
     type: GET_EMPLOYEES_LOADING
   }
 }
 
-export const getEmployeeError = (error) => {
+export const getEmployeesError = (error) => {
   return {
     type: GET_EMPLOYEES_ERROR,
     payload: error
   }
 }
-export const getProductByIdPending = () => {
+export const getEmployeeByIdLoading = () => {
   return {
     type: GET_EMPLOYEE_BY_ID_LOADING
   }
 }
 
-export const getProductByIdSuccess = (data) => {
+export const getEmployeeByIdSuccess = (data) => {
   return {
     type: GET_EMPLOYEE_BY_ID_SUCCESS,
     payload: data
   }
 }
 
-export const getProductByIdError = (error) => {
+export const getEmployeeByIdError = (error) => {
   return {
     type: GET_EMPLOYEE_BY_ID_ERROR,
     payload: error

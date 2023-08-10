@@ -10,7 +10,7 @@ function index () {
   const navigate = useNavigate()
 
   const user = useSelector((store) => store.login.user)
-  const { employees, error, isLoading } = useSelector((store) => store.employees)
+  const { employees, error, isLoading, message } = useSelector((store) => store.employees)
 
   useEffect(() => {
     if (!employees.length) {
@@ -24,7 +24,15 @@ function index () {
     navigate(`/${PublicRoutes.LOGIN}`, { replace: true })
   }
 
-  if (error) return <p>Error </p>
+  if (!error) {
+    return (
+    <>
+     <p>Error </p>
+     <button onClick={logOut} >LOGOUT</button>
+    </>
+    )
+  }
+  console.log(`error: ${error}`, `Mensaje: ${message}`)
 
   if (isLoading) return <p>Loading... </p>
 
@@ -35,17 +43,17 @@ function index () {
                     <thead>
                         <tr>
                         <th className={styles.thead}>Name</th>
-                        <th className={styles.thead}>Price</th>
-                        <th className={styles.thead}>Stock</th>
+                        <th className={styles.thead}>DNI</th>
+                        <th className={styles.thead}>Age</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {employees.map((product) => {
+                        {employees.map((employee) => {
                           return (
-                            <tr key={product._id}>
-                            <td className={styles.tbody}>{product.name}</td>
-                            <td className={styles.tbody}>$ {product.price}</td>
-                            <td className={styles.tbody}>{product.stock}</td>
+                            <tr key={employee._id}>
+                            <td className={styles.tbody}>{employee.name}</td>
+                            <td className={styles.tbody}>$ {employee.DNI}</td>
+                            <td className={styles.tbody}>{employee.age}</td>
                             </tr>
                           )
                         })}

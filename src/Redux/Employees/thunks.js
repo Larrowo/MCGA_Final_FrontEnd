@@ -1,17 +1,17 @@
 import {
-  getEmployeesPending,
+  getEmployeesLoading,
   getEmployeesSuccess,
   getEmployeesError,
-  createEmployeePending,
-  createEmployeeSuccess,
-  createEmployeeError,
-  updateEmployeePending,
-  updateEmployeeSuccess,
-  updateEmployeeError,
-  getEmployeeByIdPending,
+  addEmployeeLoading,
+  addEmployeeSuccess,
+  addEmployeeError,
+  editEmployeeLoading,
+  editEmployeeSuccess,
+  editEmployeeError,
+  getEmployeeByIdLoading,
   getEmployeeByIdSuccess,
   getEmployeeByIdError,
-  deleteEmployeePending,
+  deleteEmployeeLoading,
   deleteEmployeeSuccess,
   deleteEmployeeError
 
@@ -20,19 +20,21 @@ import {
 // GET EMPLOYEES LIST
 export const getEmployees = () => {
   return (dispatch, getState) => {
-    dispatch(getEmployeesPending())
+    dispatch(getEmployeesLoading())
     const token = getState().login.token
-    return fetch(`${import.meta.env.REACT_APP_API}/Employees`, {
+    return fetch(`${import.meta.env.REACT_APP_API}/api/employees`, {
       headers: {
         token
       }
     })
       .then((response) => {
         if (response.status !== 200) {
-          return response.json().then(({ message }) => {
-            throw new Error(message)
-          })
+          return response.json()
+            .then(({ message }) => {
+              throw new Error(message)
+            })
         }
+        console.log('RESPONSE', response.data)
         return response.json()
       })
       .then((response) => {
@@ -47,7 +49,7 @@ export const getEmployees = () => {
 // GET EMPLOYEE BY ID
 export const getEmployeeById = (id) => {
   return (dispatch) => {
-    dispatch(getEmployeeByIdPending())
+    dispatch(getEmployeeByIdLoading())
     return fetch(`${import.meta.env.REACT_APP_API}/Employees?_id=${id}`)
       .then((response) => {
         if (response.status !== 200) {
@@ -68,9 +70,9 @@ export const getEmployeeById = (id) => {
 }
 
 // ADD EMPLOYEE
-export const createEmployee = (values) => {
+export const addEmployee = (values) => {
   return (dispatch, getState) => {
-    dispatch(createEmployeePending())
+    dispatch(addEmployeeLoading())
     const token = getState().login.token
     const options = {
       method: 'POST',
@@ -90,19 +92,19 @@ export const createEmployee = (values) => {
         return response.json()
       })
       .then((response) => {
-        dispatch(createEmployeeSuccess(response.data))
+        dispatch(addEmployeeSuccess(response.data))
         return response.data
       })
       .catch((error) => {
-        dispatch(createEmployeeError(error.toString()))
+        dispatch(addEmployeeError(error.toString()))
       })
   }
 }
 
-// UPDATE EMPLOYEE
-export const updateEmployee = (id, values) => {
+// edit EMPLOYEE
+export const editEmployee = (id, values) => {
   return (dispatch) => {
-    dispatch(updateEmployeePending())
+    dispatch(editEmployeeLoading())
     const options = {
       method: 'PUT',
       headers: {
@@ -120,11 +122,11 @@ export const updateEmployee = (id, values) => {
         return response.json()
       })
       .then((response) => {
-        dispatch(updateEmployeeSuccess(response.data))
+        dispatch(editEmployeeSuccess(response.data))
         return response.data
       })
       .catch((error) => {
-        dispatch(updateEmployeeError(error.toString()))
+        dispatch(editEmployeeError(error.toString()))
       })
   }
 }
@@ -132,7 +134,7 @@ export const updateEmployee = (id, values) => {
 // DELETE EMPLOYEE
 export const deleteEmployee = (id) => {
   return (dispatch) => {
-    dispatch(deleteEmployeePending())
+    dispatch(deleteEmployeeLoading())
     return fetch(`${import.meta.env.REACT_APP_API}/Employees/${id}`, { method: 'DELETE' })
       .then((response) => {
         if (response.status !== 204) {

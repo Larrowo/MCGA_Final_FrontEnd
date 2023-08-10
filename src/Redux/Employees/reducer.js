@@ -33,7 +33,7 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         ...state,
         isLoading: false,
         error: false,
-        Employees: [...state.employees, action.payload]
+        employees: [...state.employees, action.payload]
       }
     case ADD_EMPLOYEE_ERROR:
       return {
@@ -52,7 +52,8 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
       return {
         ...state,
         isLoading: false,
-        Employees: action.payload
+        employees: action.payload,
+        message: 'EMPLOYEES LOADED'
       }
     case GET_EMPLOYEES_ERROR:
       return {
@@ -71,7 +72,7 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         ...state,
         isLoading: false,
         error: false,
-        Employees: action.payload
+        employees: action.payload
       }
     case EDIT_EMPLOYEE_ERROR:
       return {
@@ -90,7 +91,7 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         ...state,
         isLoading: false,
         error: false,
-        Employees: [...state.employees.filter((EMPLOYEE) => EMPLOYEE._id !== action.payload)],
+        employees: [...state.employees.filter((EMPLOYEE) => EMPLOYEE._id !== action.payload)],
         message: 'Employee deleted Successfully'
       }
     case DELETE_EMPLOYEE_ERROR:

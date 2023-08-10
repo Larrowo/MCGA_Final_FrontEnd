@@ -19,30 +19,27 @@ import {
 
 // GET EMPLOYEES LIST
 export const getEmployees = () => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     dispatch(getEmployeesLoading())
-    const token = getState().login.token
-    return fetch(`${import.meta.env.REACT_APP_API}/api/employees`, {
-      headers: {
-        token
-      }
-    })
-      .then((response) => {
-        if (response.status !== 200) {
-          return response.json()
-            .then(({ message }) => {
-              throw new Error(message)
-            })
-        }
-        console.log('RESPONSE', response.data)
-        return response.json()
+    // const token = getState().login.token
+    try {
+      const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/api/employees`, {
+        method: 'GET',
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        },
+        mode: 'cors'
       })
-      .then((response) => {
-        dispatch(getEmployeesSuccess(response.data))
-      })
-      .catch((error) => {
-        dispatch(getEmployeesError(error.toString()))
-      })
+
+      const json = await response.json()
+      console.log(json)
+      console.log('data', json.data)
+      response.statusCode !== 200
+        ? dispatch(getEmployeesError(json.toString()))
+        : dispatch(getEmployeesSuccess(json))
+    } catch (error) {
+      dispatch(getEmployeesError(error.toString()))
+    }
   }
 }
 

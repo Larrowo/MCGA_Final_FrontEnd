@@ -12,14 +12,14 @@ function index () {
   }
 
   return (
-    <div className={styles.container} >
-     <div>HEADER</div>
+    <header className={styles.container} >
+     <h2>HEADER</h2>
       <section className={styles.buttonContainer} >
         <button onClick={() => navigateTo(PublicRoutes.HOME)} >HOME button</button>
         <button onClick={() => navigateTo(PrivateRoutes.DASHBOARD)} >DASHBOARD button</button>
       </section>
       <button><a href="https://github.com/Larrowo/MCGA_Final_FrontEnd" >Github</a></button>
-    </div>
+    </header>
   )
 }
 export default index

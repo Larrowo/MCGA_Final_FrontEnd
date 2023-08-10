@@ -1,6 +1,8 @@
+import styles from './footer.module.css'
+
 function index () {
   return (
-    <div>index</div>
+    <footer className={styles.container} >2023 - Julián Astudillo </footer>
   )
 }
 export default index

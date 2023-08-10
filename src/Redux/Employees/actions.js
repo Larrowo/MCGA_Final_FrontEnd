@@ -5,6 +5,9 @@ import {
   GET_EMPLOYEES_SUCCESS,
   GET_EMPLOYEES_LOADING,
   GET_EMPLOYEES_ERROR,
+  GET_EMPLOYEE_BY_ID_SUCCESS,
+  GET_EMPLOYEE_BY_ID_LOADING,
+  GET_EMPLOYEE_BY_ID_ERROR,
   EDIT_EMPLOYEE_SUCCESS,
   EDIT_EMPLOYEE_LOADING,
   EDIT_EMPLOYEE_ERROR,
@@ -84,6 +87,25 @@ export const getEmployeeLoading = (data) => {
 export const getEmployeeError = (error) => {
   return {
     type: GET_EMPLOYEES_ERROR,
+    payload: error
+  }
+}
+export const getProductByIdPending = () => {
+  return {
+    type: GET_EMPLOYEE_BY_ID_LOADING
+  }
+}
+
+export const getProductByIdSuccess = (data) => {
+  return {
+    type: GET_EMPLOYEE_BY_ID_SUCCESS,
+    payload: data
+  }
+}
+
+export const getProductByIdError = (error) => {
+  return {
+    type: GET_EMPLOYEE_BY_ID_ERROR,
     payload: error
   }
 }

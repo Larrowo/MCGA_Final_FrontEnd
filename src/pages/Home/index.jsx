@@ -1,6 +1,8 @@
 function index () {
   return (
-    <div>HOME</div>
+    <>
+     <h2>HOME</h2>
+    </>
   )
 }
 export default index

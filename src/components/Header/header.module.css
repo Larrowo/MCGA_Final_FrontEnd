@@ -5,6 +5,7 @@
     justify-content: space-around;
     border: 1px solid red;
     min-height: 7vh;
+    min-width: 100vw;
 }
 
 .buttonContainer{

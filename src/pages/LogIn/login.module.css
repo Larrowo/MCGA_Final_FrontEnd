@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid red;
+    min-height: 40vh;
+    min-width: 20vw;
+    padding: 1rem
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    min-height: 40vh;
+    justify-content: space-between;
+}

@@ -22,11 +22,10 @@ function index () {
 
   const logOut = () => {
     user.name = ''
-
     navigate(`/${PublicRoutes.LOGIN}`, { replace: true })
   }
 
-  if (!error) {
+  if (error) {
     return (
     <>
      <p>Error </p>

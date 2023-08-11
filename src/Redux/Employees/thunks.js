@@ -31,12 +31,12 @@ export const getEmployees = () => {
         mode: 'cors'
       })
 
+      console.log(response)
       const json = await response.json()
       console.log(json)
-      console.log('data', json.data)
-      response.statusCode !== 200
+      response.status !== 200
         ? dispatch(getEmployeesError(json.toString()))
-        : dispatch(getEmployeesSuccess(json))
+        : dispatch(getEmployeesSuccess(json.data))
     } catch (error) {
       dispatch(getEmployeesError(error.toString()))
     }

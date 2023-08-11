@@ -16,6 +16,7 @@ import {
   DELETE_EMPLOYEE_ERROR
 } from './types'
 
+// ADD EMPLOYEE
 export const addEmployeeSuccess = (data) => {
   return {
     type: ADD_EMPLOYEE_SUCCESS,
@@ -36,34 +37,41 @@ export const addEmployeeError = (error) => {
   }
 }
 
+// EDIT EMPLOYEE
 export const editEmployeeSuccess = (data) => {
   return {
     type: EDIT_EMPLOYEE_SUCCESS,
     payload: data
   }
 }
+
 export const editEmployeeLoading = () => {
   return {
     type: EDIT_EMPLOYEE_LOADING
   }
 }
+
 export const editEmployeeError = (error) => {
   return {
     type: EDIT_EMPLOYEE_ERROR,
     payload: error
   }
 }
+
+// DELETE EMPLOYEE
 export const deleteEmployeeSuccess = (data) => {
   return {
     type: DELETE_EMPLOYEE_SUCCESS,
     payload: data
   }
 }
+
 export const deleteEmployeeLoading = () => {
   return {
     type: DELETE_EMPLOYEE_LOADING
   }
 }
+
 export const deleteEmployeeError = (error) => {
   return {
     type: DELETE_EMPLOYEE_ERROR,
@@ -71,6 +79,7 @@ export const deleteEmployeeError = (error) => {
   }
 }
 
+// GET EMPLOYEES
 export const getEmployeesSuccess = (data) => {
   return {
     type: GET_EMPLOYEES_SUCCESS,
@@ -78,7 +87,7 @@ export const getEmployeesSuccess = (data) => {
   }
 }
 
-export const getEmployeesLoading = (data) => {
+export const getEmployeesLoading = () => {
   return {
     type: GET_EMPLOYEES_LOADING
   }
@@ -90,6 +99,8 @@ export const getEmployeesError = (error) => {
     payload: error
   }
 }
+
+// GET EMPLOYEE BY ID
 export const getEmployeeByIdLoading = () => {
   return {
     type: GET_EMPLOYEE_BY_ID_LOADING

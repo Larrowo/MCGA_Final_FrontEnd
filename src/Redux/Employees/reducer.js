@@ -95,7 +95,7 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         ...state,
         isLoading: false,
         error: false,
-        employees: [...state.employees.filter((EMPLOYEE) => EMPLOYEE._id !== action.payload)],
+        employees: [...state.employees.filter((employee) => employee._id !== action.payload)],
         message: 'Employee deleted Successfully'
       }
     case DELETE_EMPLOYEE_ERROR:

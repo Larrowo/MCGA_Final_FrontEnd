@@ -31,9 +31,7 @@ export const getEmployees = () => {
         mode: 'cors'
       })
 
-      console.log(response)
       const json = await response.json()
-      console.log(json)
       response.status !== 200
         ? dispatch(getEmployeesError(json.toString()))
         : dispatch(getEmployeesSuccess(json.data))
@@ -98,7 +96,7 @@ export const addEmployee = (values) => {
   }
 }
 
-// edit EMPLOYEE
+// EDIT EMPLOYEE
 export const editEmployee = (id, values) => {
   return (dispatch) => {
     dispatch(editEmployeeLoading())
@@ -130,20 +128,25 @@ export const editEmployee = (id, values) => {
 
 // DELETE EMPLOYEE
 export const deleteEmployee = (id) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(deleteEmployeeLoading())
-    return fetch(`${import.meta.env.REACT_APP_API}/Employees/${id}`, { method: 'DELETE' })
-      .then((response) => {
-        if (response.status !== 204) {
-          return response.json()
-            .then(({ message }) => {
-              throw new Error(message)
-            })
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_API_URL}/api/${id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+          },
+          mode: 'cors'
         }
-        dispatch(deleteEmployeeSuccess(id))
-      })
-      .catch((error) => {
-        dispatch(deleteEmployeeError(error.toString()))
-      })
+      )
+      const json = await response.json()
+      dispatch(deleteEmployeeSuccess(json.data))
+    } catch (error) {
+      dispatch(deleteEmployeeError(error.toString()))
+      console.log(error.toString())
+    }
   }
 }

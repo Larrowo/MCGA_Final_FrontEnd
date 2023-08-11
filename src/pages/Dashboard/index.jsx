@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { PublicRoutes } from '../../models/routes'
 import { useEffect } from 'react'
-import { getEmployees } from '../../Redux/Employees/thunks'
+import { deleteEmployee, getEmployees } from '../../Redux/Employees/thunks'
 import styles from './dashboard.module.css'
 
 function index () {
@@ -10,7 +10,7 @@ function index () {
   const navigate = useNavigate()
 
   const user = useSelector((store) => store.login.user)
-  const { employees, error, isLoading } = useSelector((store) => store.employees)
+  const { employees, error, isLoading, message } = useSelector((store) => store.employees)
 
   useEffect(() => {
     if (!employees || employees.length === 0) {
@@ -18,14 +18,18 @@ function index () {
     }
   }, [employees])
 
-  console.log(employees)
-
   const logOut = () => {
     user.name = ''
     navigate(`/${PublicRoutes.LOGIN}`, { replace: true })
   }
 
+  const handleDeleteProduct = (id) => {
+    dispatch(deleteEmployee(id))
+  }
+
   if (error) {
+    console.log(message)
+    console.log(employees)
     return (
     <>
      <p>Error </p>
@@ -38,6 +42,7 @@ function index () {
 
   return (
     <div>
+      <button onClick={logOut} >LOGOUT</button>
       <h2>DASHBOARD</h2>
       <table className={styles.table}>
                     <thead>
@@ -56,12 +61,17 @@ function index () {
                             <td className={styles.tbody}>{employee.surname}</td>
                             <td className={styles.tbody}> {employee.DNI}</td>
                             <td className={styles.tbody}>{employee.age}</td>
+                            <td>
+                            {/* <button value="Update" onClick={() => handleUpdateProduct(product)}>Update</button> */}
+                            <button value="Delete" onClick={() => handleDeleteProduct(employee._id)}>Delete</button>
+                            </td>
                             </tr>
                           )
                         })}
                     </tbody>
             </table>
-      <button onClick={logOut} >LOGOUT</button>
+            <h3>Add a Product:</h3>
+              {/* <button value='Add a product' onClick={() => { setIsAdding(true) }}>ADD</button> */}
     </div>
 
   )

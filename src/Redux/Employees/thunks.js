@@ -23,7 +23,7 @@ export const getEmployees = () => {
     dispatch(getEmployeesLoading())
     // const token = getState().login.token
     try {
-      const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/api/employees`, {
+      const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/employees`, {
         method: 'GET',
         headers: {
           'Access-Control-Allow-Origin': '*'
@@ -97,7 +97,7 @@ export const editEmployee = (id, values) => {
   return async (dispatch) => {
     dispatch(editEmployeeLoading())
     try {
-      const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/api/employee/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/employee/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ export const deleteEmployee = (id) => {
     dispatch(deleteEmployeeLoading())
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_API_URL}/api/${id}`,
+        `${import.meta.env.VITE_REACT_API_URL}/${id}`,
         {
           method: 'DELETE',
           headers: {
@@ -134,7 +134,9 @@ export const deleteEmployee = (id) => {
         }
       )
       const json = await response.json()
-      dispatch(deleteEmployeeSuccess(json.data))
+      response.status !== 200
+        ? dispatch(deleteEmployeeError(json.toString()))
+        : dispatch(deleteEmployeeSuccess(json.data))
     } catch (error) {
       dispatch(deleteEmployeeError(error.toString()))
       console.log(error.toString())

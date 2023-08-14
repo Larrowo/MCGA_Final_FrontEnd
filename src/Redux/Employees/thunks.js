@@ -66,7 +66,7 @@ export const getEmployeeById = (id) => {
 
 // ADD EMPLOYEE
 export const addEmployee = (values) => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     dispatch(addEmployeeLoading())
     const token = getState().login.token
     const options = {
@@ -77,52 +77,43 @@ export const addEmployee = (values) => {
       },
       body: JSON.stringify(values)
     }
-    return fetch(`${import.meta.env.REACT_APP_API}/Employees`, options)
-      .then((response) => {
-        if (response.status !== 201) {
-          return response.json().then(({ message }) => {
-            throw new Error(message)
-          })
-        }
-        return response.json()
-      })
-      .then((response) => {
-        dispatch(addEmployeeSuccess(response.data))
-        return response.data
-      })
-      .catch((error) => {
-        dispatch(addEmployeeError(error.toString()))
-      })
+    try {
+      const response = await fetch(`${import.meta.env.REACT_APP_API}/Employees`, options)
+
+      const json = await response.json()
+      console.log(json)
+      response.status !== 200
+        ? dispatch(addEmployeeError(json.toString()))
+        : dispatch(addEmployeeSuccess(json.data))
+    } catch (error) {
+      dispatch(addEmployeeError(error.toString()))
+    }
   }
 }
 
 // EDIT EMPLOYEE
 export const editEmployee = (id, values) => {
-  return (dispatch) => {
+  console.log(id, values)
+  return async (dispatch) => {
     dispatch(editEmployeeLoading())
-    const options = {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(values)
+    try {
+      const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/api/employee/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        mode: 'cors',
+        body: JSON.stringify(values)
+      })
+      const json = response.json()
+      response.status !== 200
+        ? dispatch(editEmployeeError(json.toString()))
+        : dispatch(editEmployeeSuccess(json.data))
+    } catch (error) {
+      dispatch(editEmployeeError(error.toString()))
+      console.log(error.toString())
     }
-    return fetch(`${import.meta.env.REACT_APP_API}/Employees/${id}`, options)
-      .then((response) => {
-        if (response.status !== 200) {
-          return response.json().then(({ message }) => {
-            throw new Error(message)
-          })
-        }
-        return response.json()
-      })
-      .then((response) => {
-        dispatch(editEmployeeSuccess(response.data))
-        return response.data
-      })
-      .catch((error) => {
-        dispatch(editEmployeeError(error.toString()))
-      })
   }
 }
 

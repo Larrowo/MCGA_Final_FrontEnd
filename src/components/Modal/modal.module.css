@@ -1,8 +1,21 @@
-h2{
+h2 {
   text-transform: uppercase;
 }
 
-.modal{
+span {
+  margin-top: 20px;
+  font-size: 0.8em;
+}
+
+label {
+  text-transform: capitalize;
+}
+
+input {
+  text-align: center;
+}
+
+.modal {
   display: none;
 }
 
@@ -27,23 +40,35 @@ h2{
   width: 55vw;
   height: 500px;
   padding: 10px;
-  background-color:rgb(170, 114, 114);
+  background-color: rgb(170, 114, 114);
 }
 
-.topRow{
+.topRow {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
   height: 5vh;
   border: 1px solid green;
 }
 
-.bottomRow{
+.middleRow {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottomRow {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   border: 1px solid green;
 }
 
-
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}

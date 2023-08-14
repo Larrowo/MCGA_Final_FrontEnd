@@ -44,10 +44,10 @@ function index () {
 
   if (error) {
     return (
-    <>
-     <p>Error </p>
-     <button onClick={logOut} >LOGOUT</button>
-    </>
+      <>
+        <p>Error </p>
+        <button onClick={logOut} >LOGOUT</button>
+      </>
     )
   }
 
@@ -69,26 +69,26 @@ function index () {
         <tbody>
           {employees.map((employee) => {
             return (
-            <tr key={employee._id}>
-              <td className={styles.tbody}>{employee.name}</td>
-              <td className={styles.tbody}>{employee.surname}</td>
-              <td className={styles.tbody}> {employee.DNI}</td>
-              <td className={styles.tbody}>{employee.age}</td>
-              <td>
-                <button value="Update" onClick={() => handleButtonClick(actionsTypes.EDIT, employee)}>Update</button>
-                <button value="Delete" onClick={() => handleDeleteProduct(employee._id)}>Delete</button>
-              </td>
-            </tr>
+              <tr key={employee._id}>
+                <td className={styles.tbody}>{employee.name}</td>
+                <td className={styles.tbody}>{employee.surname}</td>
+                <td className={styles.tbody}> {employee.DNI}</td>
+                <td className={styles.tbody}>{employee.age}</td>
+                <td>
+                  <button value="Update" onClick={() => handleButtonClick(actionsTypes.EDIT, employee)}>Update</button>
+                  <button value="Delete" onClick={() => handleDeleteProduct(employee._id)}>Delete</button>
+                </td>
+              </tr>
             )
           })}
-          </tbody>
+        </tbody>
       </table>
       <h3>Add a Product:</h3>
       <Modal
-       isOpen={isModalOpen}
-       handleClose={handleToggleModal}
-       action={modalAction}
-       employee={employeeToEdit}
+        isOpen={isModalOpen}
+        handleClose={handleToggleModal}
+        action={modalAction}
+        employee={employeeToEdit}
       />
     </div>
 

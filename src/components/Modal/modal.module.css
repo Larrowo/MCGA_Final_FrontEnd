@@ -1,0 +1,74 @@
+h2 {
+  text-transform: uppercase;
+}
+
+span {
+  margin-top: 20px;
+  font-size: 0.8em;
+}
+
+label {
+  text-transform: capitalize;
+}
+
+input {
+  text-align: center;
+}
+
+.modal {
+  display: none;
+}
+
+.modalOpen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, .60);
+}
+
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 55vw;
+  height: 500px;
+  padding: 10px;
+  background-color: rgb(170, 114, 114);
+}
+
+.topRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 5vh;
+  border: 1px solid green;
+}
+
+.middleRow {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border: 1px solid green;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}

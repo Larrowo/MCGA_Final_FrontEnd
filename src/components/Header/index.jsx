@@ -13,7 +13,7 @@ function index () {
 
   return (
     <header className={styles.container} >
-     <h2>HEADER</h2>
+      <h2>HEADER</h2>
       <section className={styles.buttonContainer} >
         <button onClick={() => navigateTo(PublicRoutes.HOME)} >HOME button</button>
         <button onClick={() => navigateTo(PrivateRoutes.DASHBOARD)} >DASHBOARD button</button>

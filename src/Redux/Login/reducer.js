@@ -14,11 +14,11 @@ const initialState = {
   list: [],
   error: '',
   user:
-    {
-      name: '',
-      email: '',
-      token: ''
-    },
+  {
+    name: '',
+    email: '',
+    token: ''
+  },
   token: null
 }
 
@@ -62,7 +62,7 @@ const loginReducer = (state = initialState, action) => {
         token: action.payload
       }
     }
-    case LOGOUT:{
+    case LOGOUT: {
       return {
         ...state,
         token: action.payload.token,

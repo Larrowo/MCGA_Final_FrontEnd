@@ -3,6 +3,9 @@ import { addEmployeeLoading } from '../../Redux/Employees/actions'
 import styles from './modal.module.css'
 import { useState } from 'react'
 import { addEmployee, editEmployee } from '../../Redux/Employees/thunks'
+import { actionsTypes } from '../../models/actionTypes'
+import EditModal from '../Modal/EditModal'
+import AddModal from '../Modal/AddModal'
 
 const Modal = ({ isOpen, handleClose, action, employee }) => {
   const [newEmployeeData, setNewEmployeeData] = useState({
@@ -21,12 +24,6 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
       email: ''
     })
   }
-  const handleChange = (event) => {
-    setNewEmployeeData((prevData) => ({
-      ...prevData,
-      [event.target.name]: event.target.value
-    }))
-  }
 
   const handleSubmit = () => {
     dispatch(editEmployee(employee._id, newEmployeeData))
@@ -40,44 +37,13 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
           <h2>{action}</h2>
           <button className={styles.cancelButton} onClick={handleCancelButtonClick}>Cancel</button>
         </div>
-        <div className={styles.middleRow} >
-          <form action="submit">
-            <div className={styles.inputContainer}>
-              <label htmlFor='name'>New name</label>
-              <input
-                type='text'
-                id='name'
-                name='name'
-                value={newEmployeeData.name}
-                placeholder={employee.name}
-                onChange={handleChange}
-              />
-            </div>
-            <div className={styles.inputContainer}>
-              <label htmlFor='surname'>New last name</label>
-              <input
-                type='text'
-                id='surname'
-                name='surname'
-                value={newEmployeeData.surname}
-                placeholder={employee.surname}
-                onChange={handleChange}
-              />
-            </div>
-            <div className={styles.inputContainer}>
-              <label htmlFor='email' >New email</label>
-              <input
-                type='text'
-                id='email'
-                name='email'
-                value={newEmployeeData.email}
-                placeholder={employee.email}
-                onChange={handleChange}
-              />
-            </div>
-          </form>
-          <span>If no new input is included, the current employee information will be used</span>
-        </div>
+        { action === actionsTypes.EDIT
+          ? <EditModal
+            newEmployeeData={newEmployeeData}
+            employee={employee}
+            setNewEmployeeData={setNewEmployeeData} />
+          : <AddModal/>
+        }
         <div className={styles.bottomRow} >
           <button onClick={handleSubmit} >Save</button>
         </div>

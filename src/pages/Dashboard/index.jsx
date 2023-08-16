@@ -35,6 +35,7 @@ function index () {
       handleToggleModal()
     } else {
       setModalAction(actionsTypes.CREATE)
+      handleToggleModal()
     }
   }
 
@@ -83,7 +84,10 @@ function index () {
           })}
         </tbody>
       </table>
-      <h3>Add a Product:</h3>
+      <div>
+        <h3>Add a Product:</h3>
+        <button onClick={() => handleButtonClick(actionsTypes.CREATE)} > ADD </button>
+      </div>
       <Modal
         isOpen={isModalOpen}
         handleClose={handleToggleModal}

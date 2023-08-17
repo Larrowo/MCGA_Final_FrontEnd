@@ -11,23 +11,53 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
   const [newEmployeeData, setNewEmployeeData] = useState({
     name: '',
     surname: '',
-    email: ''
+    email: '',
+    nationality: '',
+    DNI: null,
+    birthDate: '',
+    age: null
+
   })
 
   const dispatch = useDispatch()
+
+  // const TEST_EMPLOYEE = {
+  //   name: 'Testing ',
+  //   surname: 'add',
+  //   email: 'add@add.com',
+  //   nationality: 'peruvian',
+  //   DNI: 4023042,
+  //   birthDate: new Date(),
+  //   age: calculateAge()
+  // }
 
   const handleCancelButtonClick = () => {
     handleClose()
     setNewEmployeeData({
       name: '',
       surname: '',
-      email: ''
+      email: '',
+      nationality: '',
+      DNI: null,
+      birthDate: '',
+      age: null
     })
   }
 
+  const handleChange = (event) => {
+    setNewEmployeeData((prevData) => ({
+      ...prevData,
+      [event.target.name]: event.target.value
+    }))
+  }
+
   const handleSubmit = () => {
-    dispatch(editEmployee(employee._id, newEmployeeData))
-    handleClose()
+    if (action === actionsTypes.EDIT) {
+      dispatch(editEmployee(employee._id, newEmployeeData))
+      handleClose()
+    } else {
+      dispatch(addEmployee())
+    }
   }
 
   return (
@@ -41,8 +71,11 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
           ? <EditModal
             newEmployeeData={newEmployeeData}
             employee={employee}
-            setNewEmployeeData={setNewEmployeeData} />
-          : <AddModal/>
+            handleChange={handleChange} />
+          : <AddModal
+            newEmployeeData={newEmployeeData}
+            handleChange={handleChange}
+          />
         }
         <div className={styles.bottomRow} >
           <button onClick={handleSubmit} >Save</button>

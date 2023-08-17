@@ -7,6 +7,7 @@ import styles from './dashboard.module.css'
 import Modal from '../../components/Modal'
 import useModal from '../../helpers/hooks/useModal'
 import { actionsTypes } from '../../models/actionTypes'
+import { calculateAge } from '../../helpers/calculateAge'
 
 function index () {
   const [modalAction, setModalAction] = useState('')
@@ -74,7 +75,7 @@ function index () {
                 <td className={styles.tbody}>{employee.name}</td>
                 <td className={styles.tbody}>{employee.surname}</td>
                 <td className={styles.tbody}> {employee.DNI}</td>
-                <td className={styles.tbody}>{employee.age}</td>
+                <td className={styles.tbody}>{calculateAge(employee.birthDate)}</td>
                 <td>
                   <button value="Update" onClick={() => handleButtonClick(actionsTypes.EDIT, employee)}>Update</button>
                   <button value="Delete" onClick={() => handleDeleteProduct(employee._id)}>Delete</button>

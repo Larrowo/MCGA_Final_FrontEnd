@@ -73,8 +73,10 @@ export const addEmployee = (values) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
         token
       },
+      mode: 'cors',
       body: JSON.stringify(values)
     }
     try {

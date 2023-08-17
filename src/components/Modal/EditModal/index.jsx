@@ -1,13 +1,6 @@
 import styles from './editModal.module.css'
 
-function index ({ newEmployeeData, setNewEmployeeData, employee }) {
-  const handleChange = (event) => {
-    setNewEmployeeData((prevData) => ({
-      ...prevData,
-      [event.target.name]: event.target.value
-    }))
-  }
-
+function index ({ newEmployeeData, handleChange, employee }) {
   return (
     <div className={styles.middleRow} >
       <form action="submit">

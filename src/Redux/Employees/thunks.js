@@ -80,7 +80,7 @@ export const addEmployee = (values) => {
       body: JSON.stringify(values)
     }
     try {
-      const response = await fetch(`${import.meta.env.REACT_APP_API}/Employees`, options)
+      const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/employees`, options)
 
       const json = await response.json()
       console.log(json)

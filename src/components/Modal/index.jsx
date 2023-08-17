@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux'
-import { addEmployeeLoading } from '../../Redux/Employees/actions'
 import styles from './modal.module.css'
 import { useState } from 'react'
 import { addEmployee, editEmployee } from '../../Redux/Employees/thunks'
@@ -8,28 +7,16 @@ import EditModal from '../Modal/EditModal'
 import AddModal from '../Modal/AddModal'
 
 const Modal = ({ isOpen, handleClose, action, employee }) => {
+  const dispatch = useDispatch()
   const [newEmployeeData, setNewEmployeeData] = useState({
     name: '',
     surname: '',
     email: '',
     nationality: '',
-    DNI: null,
-    birthDate: '',
-    age: null
+    DNI: undefined,
+    birthDate: ''
 
   })
-
-  const dispatch = useDispatch()
-
-  // const TEST_EMPLOYEE = {
-  //   name: 'Testing ',
-  //   surname: 'add',
-  //   email: 'add@add.com',
-  //   nationality: 'peruvian',
-  //   DNI: 4023042,
-  //   birthDate: new Date(),
-  //   age: calculateAge()
-  // }
 
   const handleCancelButtonClick = () => {
     handleClose()
@@ -38,9 +25,8 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
       surname: '',
       email: '',
       nationality: '',
-      DNI: null,
-      birthDate: '',
-      age: null
+      DNI: undefined,
+      birthDate: ''
     })
   }
 
@@ -56,7 +42,8 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
       dispatch(editEmployee(employee._id, newEmployeeData))
       handleClose()
     } else {
-      dispatch(addEmployee())
+      dispatch(addEmployee(newEmployeeData))
+      handleClose()
     }
   }
 

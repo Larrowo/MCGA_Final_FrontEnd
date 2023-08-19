@@ -2,7 +2,6 @@ import {
   GET_LOGIN_PENDING,
   GET_LOGIN_SUCCESS,
   GET_LOGIN_ERROR,
-  SET_USER,
   SET_TOKEN,
   LOGOUT
 } from './types'
@@ -14,6 +13,7 @@ export const getLoginPending = () => {
 }
 
 export const getLoginSuccess = (data) => {
+  console.log(data)
   return {
     type: GET_LOGIN_SUCCESS,
     payload: data
@@ -27,15 +27,7 @@ export const getLoginError = (error) => {
   }
 }
 
-export const setUser = (user) => {
-  localStorage.setItem(import.meta.env.REACT_APP_USER_KEY, JSON.stringify(user))
-  return {
-    type: SET_USER,
-    payload: user
-  }
-}
-
-const TOKEN_KEY = import.meta.env.REACT_APP_TOKEN_KEY
+const TOKEN_KEY = 'UserToken'
 export const setToken = (token) => {
   localStorage.setItem(TOKEN_KEY, token)
   return {
@@ -46,12 +38,14 @@ export const setToken = (token) => {
 
 export const logout = () => {
   localStorage.removeItem(TOKEN_KEY)
-  localStorage.removeItem(import.meta.env.REACT_APP_USER_KEY)
   return {
     type: LOGOUT,
     payload: {
-      user: null,
-      token: null
+      user: {
+        name: '',
+        email: '',
+        token: ''
+      }
     }
   }
 }

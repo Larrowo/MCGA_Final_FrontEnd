@@ -2,24 +2,19 @@ import {
   GET_LOGIN_PENDING,
   GET_LOGIN_SUCCESS,
   GET_LOGIN_ERROR,
-  SET_USER,
   SET_TOKEN,
   LOGOUT
 } from './types'
 
-// const user = JSON.parse(localStorage.getItem(import.meta.env.REACT_APP_USER_KEY))
-
 const initialState = {
   isFetching: false,
-  list: [],
   error: '',
   user:
   {
     name: '',
     email: '',
     token: ''
-  },
-  token: null
+  }
 }
 
 const loginReducer = (state = initialState, action) => {
@@ -35,12 +30,7 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        list: state.list.map((item) => {
-          if (item._id === action.payload._id) {
-            return action.payload
-          }
-          return item
-        })
+        user: action.payload
       }
     }
     case GET_LOGIN_ERROR: {
@@ -48,12 +38,6 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         error: action.payload
-      }
-    }
-    case SET_USER: {
-      return {
-        ...state,
-        user: action.payload
       }
     }
     case SET_TOKEN: {

@@ -95,15 +95,16 @@ export const addEmployee = (values) => {
 
 // EDIT EMPLOYEE
 export const editEmployee = (id, values) => {
-  console.log(id, values)
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(editEmployeeLoading())
+    const token = getState().login.token
     try {
       const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/employee/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
+          'Access-Control-Allow-Origin': '*',
+          token
         },
         mode: 'cors',
         body: JSON.stringify(values)
@@ -121,8 +122,9 @@ export const editEmployee = (id, values) => {
 
 // DELETE EMPLOYEE
 export const deleteEmployee = (id) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(deleteEmployeeLoading())
+    const token = getState().login.token
     try {
       const response = await fetch(
         `${import.meta.env.VITE_REACT_API_URL}/${id}`,
@@ -130,7 +132,8 @@ export const deleteEmployee = (id) => {
           method: 'DELETE',
           headers: {
             'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            token
           },
           mode: 'cors'
         }

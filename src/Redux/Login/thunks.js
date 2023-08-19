@@ -12,21 +12,29 @@ export const login = (credentials) => {
     const options = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
+      mode: 'cors',
       body: JSON.stringify(credentials)
     }
     try {
-      const response = await fetch(`${import.meta.env.REACT_APP_API}/auth/login`, options)
+      const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/login`, options)
 
       const json = await response.json()
+      console.log(json.data)
       response.status !== 200
         ? dispatch(getLoginError(json.toString()))
-        : dispatch(getLoginSuccess(json.data))
-      return response.data
+        : dispatch(getLoginSuccess(json.data.user), setToken(json.data.token))
     } catch (error) {
       dispatch(getLoginError(error.toString()))
       throw error
     }
+  }
+}
+
+export const logOut = () => {
+  return (dispatch) => {
+    dispatch(logout())
   }
 }

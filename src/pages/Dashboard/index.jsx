@@ -1,20 +1,21 @@
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { PublicRoutes } from '../../models/routes'
-import { useEffect, useState } from 'react'
+import { actionsTypes } from '../../models/actionTypes'
 import { deleteEmployee, getEmployees } from '../../Redux/Employees/thunks'
-import styles from './dashboard.module.css'
+import { logOut } from '../../Redux/Login/thunks'
 import Modal from '../../components/Modal'
 import useModal from '../../helpers/hooks/useModal'
-import { actionsTypes } from '../../models/actionTypes'
 import { calculateAge } from '../../helpers/calculateAge'
+import styles from './dashboard.module.css'
 
 function index () {
   const [modalAction, setModalAction] = useState('')
   const [employeeToEdit, setEmployeeToEdit] = useState({})
   const [isModalOpen, handleToggleModal] = useModal()
-  const user = useSelector((store) => store.login.user)
   const { employees, error, isLoading } = useSelector((store) => store.employees)
+  const userState = useSelector((store) => store.login.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -24,8 +25,9 @@ function index () {
     }
   }, [employees])
 
-  const logOut = () => {
-    user.name = ''
+  console.log(userState)
+  const dashboardLogOut = () => {
+    dispatch(logOut())
     navigate(`/${PublicRoutes.LOGIN}`, { replace: true })
   }
 
@@ -48,7 +50,7 @@ function index () {
     return (
       <>
         <p>Error </p>
-        <button onClick={logOut} >LOGOUT</button>
+        <button onClick={dashboardLogOut} >LOGOUT</button>
       </>
     )
   }
@@ -57,7 +59,7 @@ function index () {
 
   return (
     <div>
-      <button onClick={logOut} >LOGOUT</button>
+      <button onClick={dashboardLogOut} >LOGOUT</button>
       <h2>DASHBOARD</h2>
       <table className={styles.table}>
         <thead>

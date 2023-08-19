@@ -29,7 +29,7 @@ export const getLoginError = (error) => {
 
 const TOKEN_KEY = 'UserToken'
 export const setToken = (token) => {
-  localStorage.setItem(TOKEN_KEY, token)
+  sessionStorage.setItem(TOKEN_KEY, token)
   return {
     type: SET_TOKEN,
     payload: token
@@ -37,14 +37,15 @@ export const setToken = (token) => {
 }
 
 export const logout = () => {
-  localStorage.removeItem(TOKEN_KEY)
+  sessionStorage.removeItem(TOKEN_KEY)
   return {
     type: LOGOUT,
     payload: {
+      token: '',
       user: {
         name: '',
         email: '',
-        token: ''
+        role: ''
       }
     }
   }

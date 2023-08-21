@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { PrivateRoutes } from '../../models/routes'
 import styles from './login.module.css'
@@ -12,9 +12,6 @@ function index () {
     email: '',
     password: ''
   })
-  const userState = useSelector((store) => store.login.user)
-
-  console.log(userState)
 
   const handleChange = (event) => {
     setCredentials((prevData) => ({

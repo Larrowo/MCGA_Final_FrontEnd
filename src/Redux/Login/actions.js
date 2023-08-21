@@ -13,7 +13,6 @@ export const getLoginPending = () => {
 }
 
 export const getLoginSuccess = (data) => {
-  console.log(data)
   return {
     type: GET_LOGIN_SUCCESS,
     payload: data

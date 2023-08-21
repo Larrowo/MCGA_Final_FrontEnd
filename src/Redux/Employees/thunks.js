@@ -59,7 +59,6 @@ export const addEmployee = (values) => {
       const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/employees`, options)
 
       const json = await response.json()
-      console.log(json)
       response.status !== 200
         ? dispatch(addEmployeeError(json.toString()))
         : dispatch(addEmployeeSuccess(json.data))
@@ -101,7 +100,6 @@ export const deleteEmployee = (id) => {
   return async (dispatch, getState) => {
     dispatch(deleteEmployeeLoading())
     const token = getState().login.token
-    console.log(token)
     try {
       const response = await fetch(
         `${import.meta.env.VITE_REACT_API_URL}/${id}`,

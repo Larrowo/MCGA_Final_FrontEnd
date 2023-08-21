@@ -26,7 +26,6 @@ function index () {
     }
   }, [employees])
 
-  console.log(userState)
   const dashboardLogOut = () => {
     dispatch(logOut())
     navigate(`/${PublicRoutes.LOGIN}`, { replace: true })

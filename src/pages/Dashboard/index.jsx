@@ -9,6 +9,7 @@ import Modal from '../../components/Modal'
 import useModal from '../../helpers/hooks/useModal'
 import { calculateAge } from '../../helpers/calculateAge'
 import styles from './dashboard.module.css'
+import { userTypes } from '../../models/userTypes'
 
 function index () {
   const [modalAction, setModalAction] = useState('')
@@ -78,7 +79,7 @@ function index () {
                 <td className={styles.tbody}>{employee.surname}</td>
                 <td className={styles.tbody}> {employee.DNI}</td>
                 <td className={styles.tbody}>{calculateAge(employee.birthDate)}</td>
-                <td>
+                <td className={userState.role === userTypes.ADMIN ? styles.showTableButtons : styles.hideTableButtons}>
                   <button value="Update" onClick={() => handleButtonClick(actionsTypes.EDIT, employee)}>Update</button>
                   <button value="Delete" onClick={() => handleDeleteProduct(employee._id)}>Delete</button>
                 </td>
@@ -87,7 +88,7 @@ function index () {
           })}
         </tbody>
       </table>
-      <div>
+      <div className={userState.role === userTypes.ADMIN ? styles.showAddButton : styles.hideAddButton }>
         <h3>Add a Product:</h3>
         <button onClick={() => handleButtonClick(actionsTypes.CREATE)} > ADD </button>
       </div>

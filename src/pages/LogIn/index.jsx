@@ -1,16 +1,29 @@
-import { useSelector } from 'react-redux'
-// import { login } from '../../Redux/Login/thunks'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { PrivateRoutes } from '../../models/routes'
 import styles from './login.module.css'
+import { useState } from 'react'
+import { login } from '../../Redux/Login/thunks'
 
 function index () {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const user = useSelector((store) => store.login.user)
+  const [credentials, setCredentials] = useState({
+    email: '',
+    password: ''
+  })
+  const userState = useSelector((store) => store.login.user)
 
+  console.log(userState)
+
+  const handleChange = (event) => {
+    setCredentials((prevData) => ({
+      ...prevData,
+      [event.target.name]: event.target.value
+    }))
+  }
   const logIn = () => {
-    user.name = 'test'
+    dispatch(login(credentials))
     navigate(`/${PrivateRoutes.DASHBOARD}`, { replace: true })
   }
 
@@ -18,10 +31,18 @@ function index () {
     <div className={styles.container} >
       <h2>LOGIN</h2>
       <form action="submit">
-        <label htmlFor="nameInput" >Enter your Name</label>
-        <input type="text" id="nameInput" />
+        <label htmlFor="nameInput" >Enter your Email</label>
+        <input
+          type="text"
+          id="nameInput"
+          name="email"
+          onChange={handleChange} />
         <label htmlFor="passwordInput" >Enter your password</label>
-        <input type="password" id="passwordInput" />
+        <input
+          type="password"
+          id="passwordInput"
+          name="password"
+          onChange={handleChange} />
         <button onClick={logIn} >LOGIN</button>
       </form>
     </div>

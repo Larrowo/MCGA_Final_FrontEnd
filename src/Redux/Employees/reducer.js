@@ -43,7 +43,7 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         error: true,
         message: action.payload
       }
-      // GET EMPLOYEES
+    // GET EMPLOYEES
     case GET_EMPLOYEES_LOADING:
       return {
         ...state,
@@ -63,7 +63,7 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         isLoading: false,
         error: action.payload
       }
-      // EDIT EMPLOYEE
+    // EDIT EMPLOYEE
     case EDIT_EMPLOYEE_LOADING:
       return {
         ...state,
@@ -84,7 +84,7 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         error: true,
         message: action.payload
       }
-      // DELETE EMPLOYEE
+    // DELETE EMPLOYEE
     case DELETE_EMPLOYEE_LOADING:
       return {
         ...state,
@@ -105,7 +105,6 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         error: true,
         message: action.payload
       }
-
     default:
       return state
   }

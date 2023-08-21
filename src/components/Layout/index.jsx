@@ -7,10 +7,10 @@ function index ({ children }) {
   return (
     <div className={styles.container} >
       <Header/>
-        <main>
-          {children}
-        </main>
-       <Footer/>
+      <main>
+        {children}
+      </main>
+      <Footer/>
     </div>
   )
 }

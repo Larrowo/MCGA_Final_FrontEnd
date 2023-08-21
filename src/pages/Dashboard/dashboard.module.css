@@ -12,3 +12,21 @@
 .thead{
     padding: 8px;
 }
+
+.showTableButtons{
+    display: flex;
+}
+
+.hideTableButtons{
+    display:none
+}
+
+.hideAddButton{
+    display: none
+}
+
+.showAddButton{
+    display:flex;
+    flex-direction: column;
+}
+

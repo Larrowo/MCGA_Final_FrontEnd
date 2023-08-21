@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function useModal () {
+const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleToggleModal = () => {

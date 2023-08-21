@@ -21,7 +21,6 @@ import {
 export const getEmployees = () => {
   return async (dispatch, getState) => {
     dispatch(getEmployeesLoading())
-    // const token = getState().login.token
     try {
       const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/employees`, {
         method: 'GET',
@@ -41,29 +40,6 @@ export const getEmployees = () => {
   }
 }
 
-// GET EMPLOYEE BY ID
-export const getEmployeeById = (id) => {
-  return (dispatch) => {
-    dispatch(getEmployeeByIdLoading())
-    return fetch(`${import.meta.env.REACT_APP_API}/Employees?_id=${id}`)
-      .then((response) => {
-        if (response.status !== 200) {
-          return response.json().then(({ message }) => {
-            throw new Error(message)
-          })
-        }
-        return response.json()
-      })
-      .then((response) => {
-        dispatch(getEmployeeByIdSuccess(response.data[0]))
-        return response.data[0]
-      })
-      .catch((error) => {
-        dispatch(getEmployeeByIdError(error.toString()))
-      })
-  }
-}
-
 // ADD EMPLOYEE
 export const addEmployee = (values) => {
   return async (dispatch, getState) => {
@@ -74,7 +50,7 @@ export const addEmployee = (values) => {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        token
+        authorization: `Bearer ${token}`
       },
       mode: 'cors',
       body: JSON.stringify(values)
@@ -104,7 +80,7 @@ export const editEmployee = (id, values) => {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
-          token
+          authorization: `Bearer ${token}`
         },
         mode: 'cors',
         body: JSON.stringify(values)
@@ -125,6 +101,7 @@ export const deleteEmployee = (id) => {
   return async (dispatch, getState) => {
     dispatch(deleteEmployeeLoading())
     const token = getState().login.token
+    console.log(token)
     try {
       const response = await fetch(
         `${import.meta.env.VITE_REACT_API_URL}/${id}`,
@@ -133,7 +110,7 @@ export const deleteEmployee = (id) => {
           headers: {
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
-            token
+            authorization: `Bearer ${token}`
           },
           mode: 'cors'
         }
@@ -146,5 +123,31 @@ export const deleteEmployee = (id) => {
       dispatch(deleteEmployeeError(error.toString()))
       console.log(error.toString())
     }
+  }
+}
+
+/**
+ * !THIS FUNCTION IS DEPRECATED
+ */
+// GET EMPLOYEE BY ID
+export const getEmployeeById = (id) => {
+  return (dispatch) => {
+    dispatch(getEmployeeByIdLoading())
+    return fetch(`${import.meta.env.REACT_APP_API}/Employees?_id=${id}`)
+      .then((response) => {
+        if (response.status !== 200) {
+          return response.json().then(({ message }) => {
+            throw new Error(message)
+          })
+        }
+        return response.json()
+      })
+      .then((response) => {
+        dispatch(getEmployeeByIdSuccess(response.data[0]))
+        return response.data[0]
+      })
+      .catch((error) => {
+        dispatch(getEmployeeByIdError(error.toString()))
+      })
   }
 }

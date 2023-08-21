@@ -23,9 +23,13 @@ export const login = (credentials) => {
 
       const json = await response.json()
       console.log(json.data)
-      response.status !== 200
-        ? dispatch(getLoginError(json.toString()))
-        : dispatch(getLoginSuccess(json.data.user), setToken(json.data.token))
+
+      if (response.status !== 200) {
+        dispatch(getLoginError(json.toString()))
+      } else {
+        dispatch(getLoginSuccess(json.data.user))
+        dispatch(setToken(json.data.token))
+      }
     } catch (error) {
       dispatch(getLoginError(error.toString()))
       throw error

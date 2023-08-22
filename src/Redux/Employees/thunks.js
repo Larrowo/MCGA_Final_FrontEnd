@@ -44,6 +44,7 @@ export const getEmployees = () => {
 export const addEmployee = (values) => {
   return async (dispatch, getState) => {
     dispatch(addEmployeeLoading())
+    console.log(values)
     const token = getState().login.token
     const options = {
       method: 'POST',
@@ -59,11 +60,13 @@ export const addEmployee = (values) => {
       const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/employees`, options)
 
       const json = await response.json()
-      response.status !== 200
+
+      response.status !== 201
         ? dispatch(addEmployeeError(json.toString()))
         : dispatch(addEmployeeSuccess(json.data))
     } catch (error) {
       dispatch(addEmployeeError(error.toString()))
+      console.log(error.toString())
     }
   }
 }
@@ -113,10 +116,14 @@ export const deleteEmployee = (id) => {
           mode: 'cors'
         }
       )
-      const json = await response.json()
-      response.status !== 200
-        ? dispatch(deleteEmployeeError(json.toString()))
-        : dispatch(deleteEmployeeSuccess(json.data))
+      if (response.status === 204) {
+        dispatch(deleteEmployeeSuccess(id))
+      } else {
+        const jsonData = await response.json()
+        response.status === 200
+          ? dispatch(deleteEmployeeSuccess(jsonData.data))
+          : dispatch(deleteEmployeeError(jsonData.error))
+      }
     } catch (error) {
       dispatch(deleteEmployeeError(error.toString()))
       console.log(error.toString())

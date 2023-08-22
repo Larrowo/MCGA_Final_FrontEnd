@@ -17,14 +17,19 @@ function index () {
   const [isModalOpen, handleToggleModal] = useModal()
   const { employees, error, isLoading } = useSelector((store) => store.employees)
   const userState = useSelector((store) => store.login.user)
+  const token = useSelector((store) => store.login.token)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  console.log(token)
+
+  console.log(employees)
 
   useEffect(() => {
     if (!employees || employees.length === 0) {
       dispatch(getEmployees())
     }
-  }, [employees])
+  }, [dispatch, employees])
 
   const dashboardLogOut = () => {
     dispatch(logOut())

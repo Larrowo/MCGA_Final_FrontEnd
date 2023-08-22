@@ -22,7 +22,6 @@ export const login = (credentials) => {
       const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/login`, options)
 
       const json = await response.json()
-      console.log(json.data)
 
       if (response.status !== 200) {
         dispatch(getLoginError(json.toString()))

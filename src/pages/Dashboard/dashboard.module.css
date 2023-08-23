@@ -1,18 +1,36 @@
-.table{
-    display: flex;
-    flex-flow: row wrap;
-    flex-direction: column;
-    justify-content: space-evenly;
-    border: 1px solid black
+table{
+    border: 1px solid black;
+    width: 50vw;
+    table-layout: auto;
 }
 
-.tbody{
+
+thead th {
     padding: 8px;
-}
-.thead{
-    padding: 8px;
+    background-color: #845555;
+    width: 20%; 
+    border: 1px solid black;
+    color: white;
+    font-weight: bold;
+  }
+
+td{
+   padding: 8px;
+   border: 1px solid black;
 }
 
+thead .showTableButtons{
+   width: 89%;
+}
+
+.adminButtons{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: white;
+    cursor: pointer;
+}
 .showTableButtons{
     display: flex;
 }

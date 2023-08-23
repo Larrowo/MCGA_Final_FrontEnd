@@ -11,6 +11,7 @@ function index ({ newEmployeeData, handleChange }) {
           name='name'
           value={newEmployeeData.name}
           onChange={handleChange}
+          required
         />
       </div>
       <div className={styles.inputContainer}>
@@ -21,16 +22,18 @@ function index ({ newEmployeeData, handleChange }) {
           name='surname'
           value={newEmployeeData.surname}
           onChange={handleChange}
+          required
         />
       </div>
       <div className={styles.inputContainer}>
-        <label htmlFor='email' >DNI</label>
+        <label htmlFor='DNI' >DNI</label>
         <input
           type='text'
           id='DNI'
           name='DNI'
           value={newEmployeeData.DNI}
           onChange={handleChange}
+          required
         />
       </div>
       <div className={styles.inputContainer}>
@@ -41,26 +44,29 @@ function index ({ newEmployeeData, handleChange }) {
           name='email'
           value={newEmployeeData.email}
           onChange={handleChange}
+          required
         />
       </div>
       <div className={styles.inputContainer}>
-        <label htmlFor='email' >Nationality</label>
+        <label htmlFor='nationality' >Nationality</label>
         <input
           type='text'
           id='nationality'
           name='nationality'
           value={newEmployeeData.nationality}
           onChange={handleChange}
+          required
         />
       </div>
       <div className={styles.inputContainer}>
-        <label htmlFor='email' >Birth Date</label>
+        <label htmlFor='birthDate' >Birth Date</label>
         <input
           type='date'
           id='birthDate'
           name='birthDate'
           value={newEmployeeData.birthDate}
           onChange={handleChange}
+          required
         />
       </div>
     </form>

@@ -17,13 +17,8 @@ function index () {
   const [isModalOpen, handleToggleModal] = useModal()
   const { employees, error, isLoading } = useSelector((store) => store.employees)
   const userState = useSelector((store) => store.login.user)
-  const token = useSelector((store) => store.login.token)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  console.log(token)
-
-  console.log(employees)
 
   useEffect(() => {
     if (!employees || employees.length === 0) {
@@ -66,32 +61,37 @@ function index () {
     <div>
       <button onClick={dashboardLogOut} >LOGOUT</button>
       <h2>DASHBOARD</h2>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th className={styles.thead}>Name</th>
-            <th className={styles.thead}>LastName</th>
-            <th className={styles.thead}>DNI</th>
-            <th className={styles.thead}>Age</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((employee) => {
-            return (
-              <tr key={employee._id}>
-                <td className={styles.tbody}>{employee.name}</td>
-                <td className={styles.tbody}>{employee.surname}</td>
-                <td className={styles.tbody}> {employee.DNI}</td>
-                <td className={styles.tbody}>{calculateAge(employee.birthDate)}</td>
-                <td className={userState.role === userTypes.ADMIN ? styles.showTableButtons : styles.hideTableButtons}>
-                  <button value="Update" onClick={() => handleButtonClick(actionsTypes.EDIT, employee)}>Update</button>
-                  <button value="Delete" onClick={() => handleDeleteProduct(employee._id)}>Delete</button>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <div className={styles.tableContainer}>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>LastName</th>
+              <th>DNI</th>
+              <th>Age</th>
+              <th>Email</th>
+              <th className={userState.role === userTypes.ADMIN ? styles.showTableButtons : styles.hideTableButtons}>Buttons</th>
+            </tr>
+          </thead>
+          <tbody>
+            {employees.map((employee) => {
+              return (
+                <tr key={employee._id}>
+                  <td>{employee.name}</td>
+                  <td>{employee.surname}</td>
+                  <td>{employee.DNI}</td>
+                  <td>{calculateAge(employee.birthDate)}</td>
+                  <td>{employee.email}</td>
+                  <td className={userState.role === userTypes.ADMIN ? styles.showTableButtons : styles.hideTableButtons}>
+                    <button className={styles.adminButtons} value="Update" onClick={() => handleButtonClick(actionsTypes.EDIT, employee)}>Update</button>
+                    <button className={styles.adminButtons} value="Delete" onClick={() => handleDeleteProduct(employee._id)}>Delete</button>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
       <div className={userState.role === userTypes.ADMIN ? styles.showAddButton : styles.hideAddButton }>
         <h3>Add a Product:</h3>
         <button onClick={() => handleButtonClick(actionsTypes.CREATE)} > ADD </button>

@@ -13,11 +13,9 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
     surname: '',
     email: '',
     nationality: '',
-    DNI: undefined,
+    DNI: '',
     birthDate: ''
-
   })
-
   const handleCancelButtonClick = () => {
     handleClose()
     setNewEmployeeData({
@@ -25,25 +23,39 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
       surname: '',
       email: '',
       nationality: '',
-      DNI: undefined,
+      DNI: '',
       birthDate: ''
     })
   }
 
-  const handleChange = (event) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target
     setNewEmployeeData((prevData) => ({
       ...prevData,
-      [event.target.name]: event.target.value
+      [name]: value
     }))
   }
 
-  const handleSubmit = () => {
-    if (action === actionsTypes.EDIT) {
-      dispatch(editEmployee(employee._id, newEmployeeData))
-      handleClose()
-    } else {
-      dispatch(addEmployee(newEmployeeData))
-      handleClose()
+  const isSubmitDisabled = () => {
+    return (
+      !newEmployeeData.name ||
+      !newEmployeeData.surname ||
+      !newEmployeeData.email ||
+      !newEmployeeData.DNI ||
+      !newEmployeeData.birthDate
+    )
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!isSubmitDisabled()) {
+      if (action === actionsTypes.EDIT) {
+        dispatch(editEmployee(employee._id, newEmployeeData))
+        handleClose()
+      } else {
+        dispatch(addEmployee(newEmployeeData))
+        handleClose()
+      }
     }
   }
 
@@ -65,7 +77,12 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
           />
         }
         <div className={styles.bottomRow} >
-          <button onClick={handleSubmit} >Save</button>
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            disabled={isSubmitDisabled()} >
+            Save
+          </button>
         </div>
       </div>
     </div>

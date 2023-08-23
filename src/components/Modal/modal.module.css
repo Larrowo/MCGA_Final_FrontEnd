@@ -38,9 +38,10 @@ input {
   flex-direction: column;
   justify-content: space-between;
   width: 55vw;
-  height: 500px;
+  height: 45vw;
   padding: 10px;
   background-color: rgb(170, 114, 114);
+  overflow:auto;
 }
 
 .topRow {

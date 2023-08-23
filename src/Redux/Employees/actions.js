@@ -13,7 +13,8 @@ import {
   EDIT_EMPLOYEE_ERROR,
   DELETE_EMPLOYEE_SUCCESS,
   DELETE_EMPLOYEE_LOADING,
-  DELETE_EMPLOYEE_ERROR
+  DELETE_EMPLOYEE_ERROR,
+  CLEAR_ERROR
 } from './types'
 
 // ADD EMPLOYEE
@@ -118,5 +119,11 @@ export const getEmployeeByIdError = (error) => {
   return {
     type: GET_EMPLOYEE_BY_ID_ERROR,
     payload: error
+  }
+}
+
+export const clearErrorAction = () => {
+  return {
+    type: CLEAR_ERROR
   }
 }

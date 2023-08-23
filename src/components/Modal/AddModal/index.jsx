@@ -1,6 +1,13 @@
 import styles from './addModal.module.css'
 
-function index ({ newEmployeeData, handleChange }) {
+function index ({ newEmployeeData, setNewEmployeeData }) {
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setNewEmployeeData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }))
+  }
   return (
     <form action="submit">
       <div className={styles.inputContainer}>

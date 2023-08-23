@@ -13,7 +13,8 @@ import {
   getEmployeeByIdError,
   deleteEmployeeLoading,
   deleteEmployeeSuccess,
-  deleteEmployeeError
+  deleteEmployeeError,
+  clearErrorAction
 
 } from './actions'
 
@@ -87,7 +88,8 @@ export const editEmployee = (id, values) => {
         mode: 'cors',
         body: JSON.stringify(values)
       })
-      const json = response.json()
+      const json = response.data.json()
+      console.log(json.data)
       response.status !== 200
         ? dispatch(editEmployeeError(json.toString()))
         : dispatch(editEmployeeSuccess(json.data))
@@ -154,5 +156,11 @@ export const getEmployeeById = (id) => {
       .catch((error) => {
         dispatch(getEmployeeByIdError(error.toString()))
       })
+  }
+}
+
+export const clearError = () => {
+  return (dispatch) => {
+    dispatch(clearErrorAction())
   }
 }

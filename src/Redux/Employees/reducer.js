@@ -10,7 +10,8 @@ import {
   EDIT_EMPLOYEE_ERROR,
   DELETE_EMPLOYEE_SUCCESS,
   DELETE_EMPLOYEE_LOADING,
-  DELETE_EMPLOYEE_ERROR
+  DELETE_EMPLOYEE_ERROR,
+  CLEAR_ERROR
 } from './types'
 
 const INITIAL_STATE_VALUE = {
@@ -104,6 +105,11 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         isLoading: false,
         error: true,
         message: action.payload
+      }
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: false
       }
     default:
       return state

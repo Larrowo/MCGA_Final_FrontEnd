@@ -1,6 +1,17 @@
 import styles from './editModal.module.css'
 
-function index ({ newEmployeeData, handleChange, employee }) {
+function index ({ newEmployeeData, employee, setNewEmployeeData }) {
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    // // If the input is empty, use the existing employee data
+    // const newValue = value !== '' ? value : employee[name]
+
+    setNewEmployeeData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }))
+    console.log(newEmployeeData)
+  }
   return (
     <div className={styles.middleRow} >
       <form action="submit">

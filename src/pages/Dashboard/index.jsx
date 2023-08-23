@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { PublicRoutes } from '../../models/routes'
-import { actionsTypes } from '../../models/actionTypes'
-import { deleteEmployee, getEmployees } from '../../Redux/Employees/thunks'
+import { actionTypes } from '../../models/actionTypes'
+import { clearError, deleteEmployee, getEmployees } from '../../Redux/Employees/thunks'
 import { logOut } from '../../Redux/Login/thunks'
 import Modal from '../../components/Modal'
 import useModal from '../../helpers/hooks/useModal'
@@ -32,12 +32,12 @@ function index () {
   }
 
   const handleButtonClick = (actionType, employee) => {
-    if (actionType === actionsTypes.EDIT) {
-      setModalAction(actionsTypes.EDIT)
+    if (actionType === actionTypes.EDIT) {
+      setModalAction(actionTypes.EDIT)
       setEmployeeToEdit(employee)
       handleToggleModal()
     } else {
-      setModalAction(actionsTypes.CREATE)
+      setModalAction(actionTypes.CREATE)
       handleToggleModal()
     }
   }
@@ -45,13 +45,17 @@ function index () {
   const handleDeleteProduct = (id) => {
     dispatch(deleteEmployee(id))
   }
+  const handleClearError = () => {
+    dispatch(clearError())
+  }
 
   if (error) {
     return (
-      <>
+      <div className={styles.errorContainer}>
         <p>Error </p>
+        <button onClick={handleClearError} >Clear Error</button>
         <button onClick={dashboardLogOut} >LOGOUT</button>
-      </>
+      </div>
     )
   }
 
@@ -83,7 +87,7 @@ function index () {
                   <td>{calculateAge(employee.birthDate)}</td>
                   <td>{employee.email}</td>
                   <td className={userState.role === userTypes.ADMIN ? styles.showTableButtons : styles.hideTableButtons}>
-                    <button className={styles.adminButtons} value="Update" onClick={() => handleButtonClick(actionsTypes.EDIT, employee)}>Update</button>
+                    <button className={styles.adminButtons} value="Update" onClick={() => handleButtonClick(actionTypes.EDIT, employee)}>Update</button>
                     <button className={styles.adminButtons} value="Delete" onClick={() => handleDeleteProduct(employee._id)}>Delete</button>
                   </td>
                 </tr>
@@ -94,7 +98,7 @@ function index () {
       </div>
       <div className={userState.role === userTypes.ADMIN ? styles.showAddButton : styles.hideAddButton }>
         <h3>Add a Product:</h3>
-        <button onClick={() => handleButtonClick(actionsTypes.CREATE)} > ADD </button>
+        <button onClick={() => handleButtonClick(actionTypes.CREATE)} > ADD </button>
       </div>
       <Modal
         isOpen={isModalOpen}

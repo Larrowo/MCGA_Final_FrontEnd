@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { PublicRoutes } from '../../models/routes'
 import { actionTypes } from '../../models/actionTypes'
+import { userTypes } from '../../models/userTypes'
 import { clearError, deleteEmployee, getEmployees } from '../../Redux/Employees/thunks'
 import { logOut } from '../../Redux/Login/thunks'
 import Modal from '../../components/Modal'
 import useModal from '../../helpers/hooks/useModal'
 import { calculateAge } from '../../helpers/calculateAge'
 import styles from './dashboard.module.css'
-import { userTypes } from '../../models/userTypes'
 
 function index () {
   const [modalAction, setModalAction] = useState('')

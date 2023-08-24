@@ -32,7 +32,14 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
   const handleEditSubmit = (e) => {
     e.preventDefault()
 
-    const fieldsToUpdate = ['name', 'surname', 'email', 'DNI', 'birthDate', 'nationality']
+    const fieldsToUpdate = [
+      'name',
+      'surname',
+      'email',
+      'DNI',
+      'birthDate',
+      'nationality'
+    ]
     const updatedEmployeeData = { ...newEmployeeData }
 
     fieldsToUpdate.forEach((field) => {
@@ -40,13 +47,9 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
         updatedEmployeeData[field] = employee[field]
       }
     })
-
     setNewEmployeeData(updatedEmployeeData)
-
-    // Dispatch the editEmployee action or perform any other actions
     dispatch(editEmployee(employee._id, updatedEmployeeData))
     handleClose()
-    // console.log('final employee data: ', updatedEmployeeData)
   }
 
   const handleCreateSubmit = (e) => {

@@ -71,13 +71,24 @@ const employeesReducer = (state = INITIAL_STATE_VALUE, action) => {
         isLoading: false,
         message: 'Loading...'
       }
-    case EDIT_EMPLOYEE_SUCCESS:
+    case EDIT_EMPLOYEE_SUCCESS:{
+      // Find the index of the edited employee in the employees array
+      const editedEmployeeIndex = state.employees.findIndex(
+        (employee) => employee._id === action.payload._id
+      )
+
+      // Create a new array with the updated employee data
+      const updatedEmployees = state.employees.map((employee, index) =>
+        index === editedEmployeeIndex ? action.payload : employee
+      )
+
       return {
         ...state,
         isLoading: false,
         error: false,
-        employees: action.payload
+        employees: updatedEmployees
       }
+    }
     case EDIT_EMPLOYEE_ERROR:
       return {
         ...state,

@@ -45,7 +45,6 @@ export const getEmployees = () => {
 export const addEmployee = (values) => {
   return async (dispatch, getState) => {
     dispatch(addEmployeeLoading())
-    console.log(values)
     const token = getState().login.token
     const options = {
       method: 'POST',
@@ -88,7 +87,7 @@ export const editEmployee = (id, values) => {
         mode: 'cors',
         body: JSON.stringify(values)
       })
-      const json = response.data.json()
+      const json = await response.json()
       console.log(json.data)
       response.status !== 200
         ? dispatch(editEmployeeError(json.toString()))

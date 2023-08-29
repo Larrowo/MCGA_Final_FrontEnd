@@ -7,7 +7,6 @@ function index ({ newEmployeeData, employee, setNewEmployeeData }) {
       ...prevData,
       [name]: value
     }))
-    console.log(newEmployeeData)
   }
   return (
     <div className={styles.editContainer} >

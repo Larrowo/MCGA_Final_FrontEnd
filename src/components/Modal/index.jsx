@@ -8,6 +8,7 @@ import AddModal from '../Modal/AddModal'
 
 const Modal = ({ isOpen, handleClose, action, employee }) => {
   const dispatch = useDispatch()
+  const [isConfirming, setIsConfirming] = useState(false)
   const [newEmployeeData, setNewEmployeeData] = useState({
     name: '',
     surname: '',
@@ -27,6 +28,7 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
       DNI: '',
       birthDate: ''
     })
+    setIsConfirming(false)
   }
 
   const handleEditSubmit = (e) => {
@@ -50,6 +52,7 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
     setNewEmployeeData(updatedEmployeeData)
     dispatch(editEmployee(employee._id, updatedEmployeeData))
     handleClose()
+    setIsConfirming(false)
   }
 
   const handleCreateSubmit = (e) => {
@@ -58,6 +61,7 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
       dispatch(addEmployee(newEmployeeData))
       handleClose()
     }
+    setIsConfirming(false)
   }
   const isSubmitDisabled = () => {
     return (
@@ -88,12 +92,27 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
           />
         }
         <div className={styles.bottomRow} >
-          <button
-            type="submit"
-            onClick={action === actionTypes.EDIT ? handleEditSubmit : handleCreateSubmit}
-            disabled={action === actionTypes.CREATE ? isSubmitDisabled() : false} >
+          {isConfirming
+            ? <div className={styles.confirmationContainer}>
+              <p>Do you confirm this action?</p>
+              <button
+                className={styles.confirmButton}
+                type="submit"
+                onClick={action === actionTypes.EDIT ? handleEditSubmit : handleCreateSubmit}>
+                 CONFIRM
+              </button>
+              <button
+                className={styles.cancelConfirmButton}
+                onClick={() => setIsConfirming(!isConfirming)}
+              >CANCEL</button>
+            </div>
+            : <button
+              type="submit"
+              onClick={() => setIsConfirming(!isConfirming)}
+              disabled={action === actionTypes.CREATE ? isSubmitDisabled() : false} >
             Save
-          </button>
+            </button>
+          }
         </div>
       </div>
     </div>

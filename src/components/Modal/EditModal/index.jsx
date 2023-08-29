@@ -10,11 +10,12 @@ function index ({ newEmployeeData, employee, setNewEmployeeData }) {
     console.log(newEmployeeData)
   }
   return (
-    <div className={styles.middleRow} >
+    <div className={styles.editContainer} >
       <form action="submit">
         <div className={styles.inputContainer}>
           <label htmlFor='name'>New name</label>
           <input
+            className={styles.editInput}
             type='text'
             id='name'
             name='name'
@@ -26,6 +27,7 @@ function index ({ newEmployeeData, employee, setNewEmployeeData }) {
         <div className={styles.inputContainer}>
           <label htmlFor='surname'>New last name</label>
           <input
+            className={styles.editInput}
             type='text'
             id='surname'
             name='surname'
@@ -37,6 +39,7 @@ function index ({ newEmployeeData, employee, setNewEmployeeData }) {
         <div className={styles.inputContainer}>
           <label htmlFor='email' >New email</label>
           <input
+            className={styles.editInput}
             type='text'
             id='email'
             name='email'
@@ -46,7 +49,7 @@ function index ({ newEmployeeData, employee, setNewEmployeeData }) {
           />
         </div>
       </form>
-      <span>If no new input is included, the current employee information will be used</span>
+      <span className={styles.infoText}>If no new input is included, the current employee information will be used</span>
     </div>
   )
 }

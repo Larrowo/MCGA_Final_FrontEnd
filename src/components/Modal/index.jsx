@@ -73,7 +73,7 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
     <div className={isOpen ? styles.modalOpen : styles.modal}>
       <div className={styles.modalContent}>
         <div className={styles.topRow} >
-          <h2>{action}</h2>
+          <h2>{action === actionTypes.EDIT ? `Editing: ${employee.name} ${employee.surname}` : 'Add a new employee:'}</h2>
           <button className={styles.cancelButton} onClick={handleCancelButtonClick}>Cancel</button>
         </div>
         { action === actionTypes.EDIT

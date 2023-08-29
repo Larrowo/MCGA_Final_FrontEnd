@@ -1,3 +1,5 @@
+@import "../../styles/globalVariables.css";
+
 h2 {
   text-transform: uppercase;
 }
@@ -29,7 +31,7 @@ input {
   top: 0;
   left: 0;
   z-index: 9999;
-  background-color: rgba(0, 0, 0, .60);
+  background-color: var(--modal-background-color);
 }
 
 
@@ -40,7 +42,8 @@ input {
   width: 55vw;
   height: 45vw;
   padding: 10px;
-  background-color: rgb(170, 114, 114);
+  border-radius: 25px;
+  background-color: var(--background-color-grey);
   overflow:auto;
 }
 
@@ -50,7 +53,6 @@ input {
   justify-content: space-between;
   align-items: center;
   height: 5vh;
-  border: 1px solid green;
 }
 
 .middleRow {
@@ -66,7 +68,6 @@ input {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  border: 1px solid green;
 }
 
 .inputContainer {

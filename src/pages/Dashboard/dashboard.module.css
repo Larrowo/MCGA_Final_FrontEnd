@@ -1,3 +1,5 @@
+@import '../../styles/globalVariables.css';
+
 table{
     border: 1px solid black;
     width: 50vw;
@@ -6,7 +8,7 @@ table{
 
 thead th {
     padding: 8px;
-    background-color: #845555;
+    background-color:var(--primary-color-pink);
     width: 20%; 
     border: 1px solid black;
     color: white;
@@ -27,9 +29,14 @@ thead .showTableButtons{
     margin: 5px;
     padding: 5px;
     border-radius: 5px;
-    border: 1px solid black;
-    color: white;
+    border: 1px solid var(--primary-color-pink);
+    color: var(--primary-color-pink);
     cursor: pointer;
+}
+.adminButtons:hover {
+    background-color: var(--primary-color-pink);
+    border: 1px solid var(--secondary-color-black);
+    color: var(--secondary-color-black);
 }
 .showTableButtons{
     display: flex;
@@ -57,7 +64,7 @@ thead .showTableButtons{
     padding: 10px;
     border: 1px solid black;
     border-radius: 5px;
-    background-color: #845555;
+    background-color: #c52424;
     color: white;
     font-weight: bold;
 }

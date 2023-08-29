@@ -63,7 +63,7 @@ function index () {
 
   return (
     <div>
-      <button onClick={dashboardLogOut} >LOGOUT</button>
+      <button className={styles.adminButtons} onClick={dashboardLogOut} >LOGOUT</button>
       <h2>DASHBOARD</h2>
       <div className={styles.tableContainer}>
         <table>
@@ -98,7 +98,7 @@ function index () {
       </div>
       <div className={userState.role === userTypes.ADMIN ? styles.showAddButton : styles.hideAddButton }>
         <h3>Add a Product:</h3>
-        <button onClick={() => handleButtonClick(actionTypes.CREATE)} > ADD </button>
+        <button className={styles.adminButtons} onClick={() => handleButtonClick(actionTypes.CREATE)} > ADD </button>
       </div>
       <Modal
         isOpen={isModalOpen}

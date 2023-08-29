@@ -48,3 +48,12 @@
     border: 1px solid var(--primary-color-pink);
     color: var(--primary-color-pink);
   }
+
+  .hideErrorParagraph{
+    display: none;
+  }
+
+  .showErrorParagraph{
+    display:block;
+    color: var(--cancel-button-red)
+  }

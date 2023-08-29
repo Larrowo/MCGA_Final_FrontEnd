@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   isFetching: false,
-  error: '',
+  error: false,
   token: '',
   user:
   {

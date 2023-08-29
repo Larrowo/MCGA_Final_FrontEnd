@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { PrivateRoutes } from '../../models/routes'
 import styles from './login.module.css'
@@ -8,6 +8,7 @@ import { login } from '../../Redux/Login/thunks'
 function index () {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const error = useSelector((state) => state.login.error)
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -48,6 +49,7 @@ function index () {
           className={styles.input}
           onChange={handleChange}
         />
+        <p className={error ? styles.showErrorParagraph : styles.hideErrorParagraph}>Please check your credentials</p>
         <button type="button" className={styles.button} onClick={logIn}>
           LOGIN
         </button>

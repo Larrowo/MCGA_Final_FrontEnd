@@ -1,8 +1,10 @@
+@import '../../styles/globalVariables.css';
+
 .container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100vh;
-    background-color: rgb(14, 129, 115);
+    background-color: var(--background-color-grey)
 }

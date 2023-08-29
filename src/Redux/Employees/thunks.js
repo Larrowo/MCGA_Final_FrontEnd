@@ -13,7 +13,8 @@ import {
   getEmployeeByIdError,
   deleteEmployeeLoading,
   deleteEmployeeSuccess,
-  deleteEmployeeError
+  deleteEmployeeError,
+  clearErrorAction
 
 } from './actions'
 
@@ -59,11 +60,13 @@ export const addEmployee = (values) => {
       const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/employees`, options)
 
       const json = await response.json()
-      response.status !== 200
+
+      response.status !== 201
         ? dispatch(addEmployeeError(json.toString()))
         : dispatch(addEmployeeSuccess(json.data))
     } catch (error) {
       dispatch(addEmployeeError(error.toString()))
+      console.log(error.toString())
     }
   }
 }
@@ -84,7 +87,8 @@ export const editEmployee = (id, values) => {
         mode: 'cors',
         body: JSON.stringify(values)
       })
-      const json = response.json()
+      const json = await response.json()
+      console.log(json.data)
       response.status !== 200
         ? dispatch(editEmployeeError(json.toString()))
         : dispatch(editEmployeeSuccess(json.data))
@@ -113,10 +117,14 @@ export const deleteEmployee = (id) => {
           mode: 'cors'
         }
       )
-      const json = await response.json()
-      response.status !== 200
-        ? dispatch(deleteEmployeeError(json.toString()))
-        : dispatch(deleteEmployeeSuccess(json.data))
+      if (response.status === 204) {
+        dispatch(deleteEmployeeSuccess(id))
+      } else {
+        const jsonData = await response.json()
+        response.status === 200
+          ? dispatch(deleteEmployeeSuccess(jsonData.data))
+          : dispatch(deleteEmployeeError(jsonData.error))
+      }
     } catch (error) {
       dispatch(deleteEmployeeError(error.toString()))
       console.log(error.toString())
@@ -147,5 +155,11 @@ export const getEmployeeById = (id) => {
       .catch((error) => {
         dispatch(getEmployeeByIdError(error.toString()))
       })
+  }
+}
+
+export const clearError = () => {
+  return (dispatch) => {
+    dispatch(clearErrorAction())
   }
 }

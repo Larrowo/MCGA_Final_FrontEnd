@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { PublicRoutes } from '../../models/routes'
-import { actionsTypes } from '../../models/actionTypes'
-import { deleteEmployee, getEmployees } from '../../Redux/Employees/thunks'
+import { actionTypes } from '../../models/actionTypes'
+import { userTypes } from '../../models/userTypes'
+import { clearError, deleteEmployee, getEmployees } from '../../Redux/Employees/thunks'
 import { logOut } from '../../Redux/Login/thunks'
 import Modal from '../../components/Modal'
 import useModal from '../../helpers/hooks/useModal'
 import { calculateAge } from '../../helpers/calculateAge'
 import styles from './dashboard.module.css'
-import { userTypes } from '../../models/userTypes'
 
 function index () {
   const [modalAction, setModalAction] = useState('')
@@ -24,7 +24,7 @@ function index () {
     if (!employees || employees.length === 0) {
       dispatch(getEmployees())
     }
-  }, [employees])
+  }, [dispatch, employees])
 
   const dashboardLogOut = () => {
     dispatch(logOut())
@@ -32,12 +32,12 @@ function index () {
   }
 
   const handleButtonClick = (actionType, employee) => {
-    if (actionType === actionsTypes.EDIT) {
-      setModalAction(actionsTypes.EDIT)
+    if (actionType === actionTypes.EDIT) {
+      setModalAction(actionTypes.EDIT)
       setEmployeeToEdit(employee)
       handleToggleModal()
     } else {
-      setModalAction(actionsTypes.CREATE)
+      setModalAction(actionTypes.CREATE)
       handleToggleModal()
     }
   }
@@ -45,13 +45,17 @@ function index () {
   const handleDeleteProduct = (id) => {
     dispatch(deleteEmployee(id))
   }
+  const handleClearError = () => {
+    dispatch(clearError())
+  }
 
   if (error) {
     return (
-      <>
+      <div className={styles.errorContainer}>
         <p>Error </p>
+        <button onClick={handleClearError} >Clear Error</button>
         <button onClick={dashboardLogOut} >LOGOUT</button>
-      </>
+      </div>
     )
   }
 
@@ -59,37 +63,42 @@ function index () {
 
   return (
     <div>
-      <button onClick={dashboardLogOut} >LOGOUT</button>
+      <button className={styles.adminButtons} onClick={dashboardLogOut} >LOGOUT</button>
       <h2>DASHBOARD</h2>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th className={styles.thead}>Name</th>
-            <th className={styles.thead}>LastName</th>
-            <th className={styles.thead}>DNI</th>
-            <th className={styles.thead}>Age</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((employee) => {
-            return (
-              <tr key={employee._id}>
-                <td className={styles.tbody}>{employee.name}</td>
-                <td className={styles.tbody}>{employee.surname}</td>
-                <td className={styles.tbody}> {employee.DNI}</td>
-                <td className={styles.tbody}>{calculateAge(employee.birthDate)}</td>
-                <td className={userState.role === userTypes.ADMIN ? styles.showTableButtons : styles.hideTableButtons}>
-                  <button value="Update" onClick={() => handleButtonClick(actionsTypes.EDIT, employee)}>Update</button>
-                  <button value="Delete" onClick={() => handleDeleteProduct(employee._id)}>Delete</button>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <div className={styles.tableContainer}>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>LastName</th>
+              <th>DNI</th>
+              <th>Age</th>
+              <th>Email</th>
+              <th className={userState.role === userTypes.ADMIN ? styles.showTableButtons : styles.hideTableButtons}>Buttons</th>
+            </tr>
+          </thead>
+          <tbody>
+            {employees.map((employee) => {
+              return (
+                <tr key={employee._id}>
+                  <td>{employee.name}</td>
+                  <td>{employee.surname}</td>
+                  <td>{employee.DNI}</td>
+                  <td>{calculateAge(employee.birthDate)}</td>
+                  <td>{employee.email}</td>
+                  <td className={userState.role === userTypes.ADMIN ? styles.showTableButtons : styles.hideTableButtons}>
+                    <button className={styles.adminButtons} value="Update" onClick={() => handleButtonClick(actionTypes.EDIT, employee)}>Update</button>
+                    <button className={styles.adminButtons} value="Delete" onClick={() => handleDeleteProduct(employee._id)}>Delete</button>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
       <div className={userState.role === userTypes.ADMIN ? styles.showAddButton : styles.hideAddButton }>
         <h3>Add a Product:</h3>
-        <button onClick={() => handleButtonClick(actionsTypes.CREATE)} > ADD </button>
+        <button className={styles.adminButtons} onClick={() => handleButtonClick(actionTypes.CREATE)} > ADD </button>
       </div>
       <Modal
         isOpen={isModalOpen}

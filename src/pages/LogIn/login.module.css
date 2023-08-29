@@ -1,17 +1,50 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid red;
-    min-height: 40vh;
-    min-width: 20vw;
-    padding: 1rem
-}
+@import '../../styles/globalVariables.css';
 
-form {
+
+.logInContainer {
     display: flex;
     flex-direction: column;
-    min-width: 100%;
-    min-height: 40vh;
-    justify-content: space-between;
-}
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .heading {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 16px;
+    border: 1px solid var(--primary-color-pink);
+    border-radius: 8px;
+  }
+  
+  .label {
+    margin-bottom: 4px;
+  }
+  
+  .input {
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid var(--secondary-color-black);
+    border-radius: 4px;
+  }
+  
+  .button {
+    padding: 8px 16px;
+    background-color: var(--primary-color-pink);
+    border: 1px solid var(--secondary-color-black);
+    color: var(--secondary-color-black);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: var(--secondary-color-black);
+    border: 1px solid var(--primary-color-pink);
+    color: var(--primary-color-pink);
+  }

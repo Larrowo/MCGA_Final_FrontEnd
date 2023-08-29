@@ -12,11 +12,11 @@ function index () {
   }
 
   return (
-    <header className={styles.container} >
-      <h2>HEADER</h2>
+    <header className={styles.headerContainer} >
+      <h2>MCGA - FINAL</h2>
       <section className={styles.buttonContainer} >
-        <button onClick={() => navigateTo(PublicRoutes.HOME)} >HOME button</button>
-        <button onClick={() => navigateTo(PrivateRoutes.DASHBOARD)} >DASHBOARD button</button>
+        <button className={styles.headerButton} onClick={() => navigateTo(PublicRoutes.HOME)} >HOME</button>
+        <button className={styles.headerButton} onClick={() => navigateTo(PrivateRoutes.DASHBOARD)} >DASHBOARD</button>
       </section>
       <button><a href="https://github.com/Larrowo/MCGA_Final_FrontEnd" >Github</a></button>
     </header>

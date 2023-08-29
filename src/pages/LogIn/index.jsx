@@ -25,24 +25,35 @@ function index () {
   }
 
   return (
-    <div className={styles.container} >
-      <h2>LOGIN</h2>
-      <form action="submit">
-        <label htmlFor="nameInput" >Enter your Email</label>
+    <div className={styles.logInContainer}>
+      <h2 className={styles.heading}>LOGIN</h2>
+      <form className={styles.form}>
+        <label htmlFor="nameInput" className={styles.label}>
+          Enter your Email
+        </label>
         <input
           type="text"
           id="nameInput"
           name="email"
-          onChange={handleChange} />
-        <label htmlFor="passwordInput" >Enter your password</label>
+          className={styles.input}
+          onChange={handleChange}
+        />
+        <label htmlFor="passwordInput" className={styles.label}>
+          Enter your password
+        </label>
         <input
           type="password"
           id="passwordInput"
           name="password"
-          onChange={handleChange} />
-        <button onClick={logIn} >LOGIN</button>
+          className={styles.input}
+          onChange={handleChange}
+        />
+        <button type="button" className={styles.button} onClick={logIn}>
+          LOGIN
+        </button>
       </form>
     </div>
   )
 }
+
 export default index

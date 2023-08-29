@@ -1,4 +1,4 @@
-export const actionsTypes = {
+export const actionTypes = {
   EDIT: 'edit',
   CREATE: 'create'
 }

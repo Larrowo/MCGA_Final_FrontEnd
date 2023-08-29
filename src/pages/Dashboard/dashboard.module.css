@@ -1,18 +1,43 @@
-.table{
-    display: flex;
-    flex-flow: row wrap;
-    flex-direction: column;
-    justify-content: space-evenly;
-    border: 1px solid black
+@import '../../styles/globalVariables.css';
+
+table{
+    border: 1px solid black;
+    width: 50vw;
+    table-layout: auto;
 }
 
-.tbody{
+thead th {
     padding: 8px;
-}
-.thead{
-    padding: 8px;
+    background-color:var(--primary-color-pink);
+    width: 20%; 
+    border: 1px solid black;
+    color: white;
+    font-weight: bold;
+  }
+
+td{
+   padding: 8px;
+   border: 1px solid black;
 }
 
+thead .showTableButtons{
+   width: 89%;
+   justify-content: center;
+}
+
+.adminButtons{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color-pink);
+    color: var(--primary-color-pink);
+    cursor: pointer;
+}
+.adminButtons:hover {
+    background-color: var(--primary-color-pink);
+    border: 1px solid var(--secondary-color-black);
+    color: var(--secondary-color-black);
+}
 .showTableButtons{
     display: flex;
 }
@@ -28,5 +53,28 @@
 .showAddButton{
     display:flex;
     flex-direction: column;
+}
+
+.errorContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #c52424;
+    color: white;
+    font-weight: bold;
+}
+
+.errorContainer button{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: white;
+    cursor: pointer;
 }
 

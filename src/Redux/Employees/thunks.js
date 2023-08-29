@@ -66,7 +66,6 @@ export const addEmployee = (values) => {
         : dispatch(addEmployeeSuccess(json.data))
     } catch (error) {
       dispatch(addEmployeeError(error.toString()))
-      console.log(error.toString())
     }
   }
 }
@@ -88,13 +87,11 @@ export const editEmployee = (id, values) => {
         body: JSON.stringify(values)
       })
       const json = await response.json()
-      console.log(json.data)
       response.status !== 200
         ? dispatch(editEmployeeError(json.toString()))
         : dispatch(editEmployeeSuccess(json.data))
     } catch (error) {
       dispatch(editEmployeeError(error.toString()))
-      console.log(error.toString())
     }
   }
 }
@@ -127,7 +124,6 @@ export const deleteEmployee = (id) => {
       }
     } catch (error) {
       dispatch(deleteEmployeeError(error.toString()))
-      console.log(error.toString())
     }
   }
 }

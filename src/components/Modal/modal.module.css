@@ -70,6 +70,25 @@ input {
   justify-content: flex-end;
 }
 
+.confirmationContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+}
+
+.confirmButton:hover{
+  cursor: pointer;
+  border: 1px solid var(--confirm-button-green);
+}
+
+.cancelConfirmButton:hover{
+  cursor: pointer;
+  border: 1px solid var(--cancel-button-red);
+}
+
 .inputContainer {
   display: flex;
   flex-direction: column;

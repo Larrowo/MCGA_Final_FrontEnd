@@ -76,10 +76,12 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
   return (
     <div className={isOpen ? styles.modalOpen : styles.modal}>
       <div className={styles.modalContent}>
+        {/* TOP ROW */}
         <div className={styles.topRow} >
           <h2>{action === actionTypes.EDIT ? `Editing: ${employee.name} ${employee.surname}` : 'Add a new employee:'}</h2>
           <button className={styles.cancelButton} onClick={handleCancelButtonClick}>Cancel</button>
         </div>
+        {/* MODAL CONTENT */}
         { action === actionTypes.EDIT
           ? <EditModal
             newEmployeeData={newEmployeeData}
@@ -91,6 +93,7 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
             setNewEmployeeData={setNewEmployeeData}
           />
         }
+        {/* BOTTOM ROW */}
         <div className={styles.bottomRow} >
           {isConfirming
             ? <div className={styles.confirmationContainer}>
@@ -107,6 +110,7 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
               >CANCEL</button>
             </div>
             : <button
+              className={styles.saveButton}
               type="submit"
               onClick={() => setIsConfirming(!isConfirming)}
               disabled={action === actionTypes.CREATE ? isSubmitDisabled() : false} >

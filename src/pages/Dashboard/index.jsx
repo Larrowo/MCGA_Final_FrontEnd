@@ -1,19 +1,25 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
 import { PublicRoutes } from '../../models/routes'
 import { actionTypes } from '../../models/actionTypes'
 import { userTypes } from '../../models/userTypes'
+
 import { clearError, deleteEmployee, getEmployees } from '../../Redux/Employees/thunks'
 import { logOut } from '../../Redux/Login/thunks'
+
 import Modal from '../../components/Modal'
+
 import useModal from '../../helpers/hooks/useModal'
 import { calculateAge } from '../../helpers/calculateAge'
+
 import styles from './dashboard.module.css'
 
 function index () {
   const [modalAction, setModalAction] = useState('')
   const [employeeToEdit, setEmployeeToEdit] = useState({})
+  const [selectedRow, setSelectedRow] = useState(null)
   const [isModalOpen, handleToggleModal] = useModal()
   const { employees, error, isLoading } = useSelector((store) => store.employees)
   const userState = useSelector((store) => store.login.user)
@@ -78,7 +84,7 @@ function index () {
             </tr>
           </thead>
           <tbody>
-            {employees.map((employee) => {
+            {employees.map((employee, index) => {
               return (
                 <tr key={employee._id}>
                   <td>{employee.name}</td>
@@ -87,8 +93,17 @@ function index () {
                   <td>{calculateAge(employee.birthDate)}</td>
                   <td>{employee.email}</td>
                   <td className={userState.role === userTypes.ADMIN ? styles.showTableButtons : styles.hideTableButtons}>
-                    <button className={styles.adminButtons} value="Update" onClick={() => handleButtonClick(actionTypes.EDIT, employee)}>Update</button>
-                    <button className={styles.adminButtons} value="Delete" onClick={() => handleDeleteProduct(employee._id)}>Delete</button>
+                    {selectedRow === index
+                      ? <>
+                        <button className={styles.confirmDeleteButton} onClick={() => handleDeleteProduct(employee._id)} >Confirm</button>
+                        <button className={styles.confirmCancelButton} onClick={() => setSelectedRow(null)}>Cancel</button>
+                      </>
+
+                      : <>
+                        <button className={styles.adminButtons} value="Update" onClick={() => handleButtonClick(actionTypes.EDIT, employee)}>Update</button>
+                        <button className={styles.adminButtons} value="Delete" onClick={() => setSelectedRow(index)}>Delete</button>
+                      </>
+                    }
                   </td>
                 </tr>
               )

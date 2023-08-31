@@ -55,19 +55,20 @@ input {
   height: 5vh;
 }
 
-.middleRow {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+.cancelButton:hover{
+  cursor: pointer;
+  border: 1px solid var(--cancel-button-red);
 }
 
 .bottomRow {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+.saveButton:hover{
+  cursor: pointer;
+  border: 1px solid var(--confirm-button-green);
 }
 
 .confirmationContainer{

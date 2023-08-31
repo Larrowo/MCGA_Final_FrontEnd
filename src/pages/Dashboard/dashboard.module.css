@@ -1,7 +1,7 @@
 @import '../../styles/globalVariables.css';
 
 table{
-    border: 1px solid black;
+    border: 1px solid var(--secondary-color-black);
     width: 50vw;
     table-layout: auto;
 }
@@ -10,8 +10,8 @@ thead th {
     padding: 8px;
     background-color:var(--primary-color-pink);
     width: 20%; 
-    border: 1px solid black;
-    color: white;
+    border: 1px solid var(--secondary-color-black);
+    color: var(--white);
     font-weight: bold;
   }
 
@@ -64,7 +64,7 @@ thead .showTableButtons{
     padding: 10px;
     border: 1px solid black;
     border-radius: 5px;
-    background-color: #c52424;
+    background-color:var(--cancel-button-red);
     color: white;
     font-weight: bold;
 }
@@ -76,5 +76,32 @@ thead .showTableButtons{
     border: 1px solid black;
     color: white;
     cursor: pointer;
+}
+
+.confirmDeleteButton{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color-pink);
+    color: var(--confirm-button-green);
+    cursor: pointer;
+}
+
+.confirmCancelButton{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color-pink);
+    color: var(--cancel-button-red);
+    cursor: pointer;
+}
+
+.confirmDeleteButton:hover{
+    border: 1px solid var(--confirm-button-green);
+    color: var(--confirm-button-green);
+}
+.confirmCancelButton:hover {
+    border: 1px solid var(--cancel-button-red);
+    color: var(--cancel-button-red);
 }
 

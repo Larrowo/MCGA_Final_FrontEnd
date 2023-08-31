@@ -1,10 +1,14 @@
-import { useDispatch } from 'react-redux'
-import styles from './modal.module.css'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 import { addEmployee, editEmployee } from '../../Redux/Employees/thunks'
+
 import { actionTypes } from '../../models/actionTypes'
+
 import EditModal from '../Modal/EditModal'
 import AddModal from '../Modal/AddModal'
+
+import styles from './modal.module.css'
 
 const Modal = ({ isOpen, handleClose, action, employee }) => {
   const dispatch = useDispatch()
@@ -76,10 +80,12 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
   return (
     <div className={isOpen ? styles.modalOpen : styles.modal}>
       <div className={styles.modalContent}>
+        {/* TOP ROW */}
         <div className={styles.topRow} >
           <h2>{action === actionTypes.EDIT ? `Editing: ${employee.name} ${employee.surname}` : 'Add a new employee:'}</h2>
           <button className={styles.cancelButton} onClick={handleCancelButtonClick}>Cancel</button>
         </div>
+        {/* MODAL CONTENT */}
         { action === actionTypes.EDIT
           ? <EditModal
             newEmployeeData={newEmployeeData}
@@ -91,6 +97,7 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
             setNewEmployeeData={setNewEmployeeData}
           />
         }
+        {/* BOTTOM ROW */}
         <div className={styles.bottomRow} >
           {isConfirming
             ? <div className={styles.confirmationContainer}>
@@ -107,6 +114,7 @@ const Modal = ({ isOpen, handleClose, action, employee }) => {
               >CANCEL</button>
             </div>
             : <button
+              className={styles.saveButton}
               type="submit"
               onClick={() => setIsConfirming(!isConfirming)}
               disabled={action === actionTypes.CREATE ? isSubmitDisabled() : false} >

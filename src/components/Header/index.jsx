@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom'
+
 import { PrivateRoutes, PublicRoutes } from '../../models/routes'
+
 import styles from './header.module.css'
 
 function index () {

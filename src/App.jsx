@@ -1,11 +1,16 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './App.css'
+
+import { PrivateRoutes, PublicRoutes } from './models/routes'
+
 import Layout from './components/Layout'
+
+import Home from './pages/Home'
 import Login from './pages/LogIn/index'
 import Dashboard from './pages/Dashboard'
-import Home from './pages/Home'
-import { PrivateRoutes, PublicRoutes } from './models/routes'
+
 import { AuthGuard } from './guards/auth.guard'
+
+import './App.css'
 
 function App () {
   return (

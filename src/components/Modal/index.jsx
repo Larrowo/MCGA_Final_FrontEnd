@@ -1,10 +1,14 @@
-import { useDispatch } from 'react-redux'
-import styles from './modal.module.css'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 import { addEmployee, editEmployee } from '../../Redux/Employees/thunks'
+
 import { actionTypes } from '../../models/actionTypes'
+
 import EditModal from '../Modal/EditModal'
 import AddModal from '../Modal/AddModal'
+
+import styles from './modal.module.css'
 
 const Modal = ({ isOpen, handleClose, action, employee }) => {
   const dispatch = useDispatch()

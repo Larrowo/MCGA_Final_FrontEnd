@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
+
 import { PublicRoutes } from '../models/routes'
 
 export const AuthGuard = () => {

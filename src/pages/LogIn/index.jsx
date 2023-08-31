@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { PrivateRoutes } from '../../models/routes'
-import styles from './login.module.css'
-import { useState } from 'react'
+
 import { login } from '../../Redux/Login/thunks'
+
+import { PrivateRoutes } from '../../models/routes'
+
+import styles from './login.module.css'
 
 function index () {
   const dispatch = useDispatch()
